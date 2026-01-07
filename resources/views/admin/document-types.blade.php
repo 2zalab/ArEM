@@ -63,7 +63,7 @@
                                     </span>
                                 </td>
                                 <td>
-                                    @if($type->required_fields && count($type->required_fields) > 0)
+                                    @if($type->required_fields && is_array($type->required_fields) && count($type->required_fields) > 0)
                                         <small class="text-muted">{{ count($type->required_fields) }} champ(s)</small>
                                         <div class="mt-1">
                                             @foreach(array_slice($type->required_fields, 0, 3) as $field)
