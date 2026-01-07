@@ -19,50 +19,103 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .auth-container {
+            display: flex;
             min-height: 100vh;
+        }
+
+        /* Left side - Image with blur effect */
+        .auth-left {
+            flex: 1;
+            position: relative;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            background-image:
+                linear-gradient(135deg, rgba(0, 51, 102, 0.9) 0%, rgba(0, 153, 204, 0.85) 100%),
+                url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&h=1200&fit=crop');
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: white;
+            padding: 60px;
         }
 
-        .auth-card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 450px;
-            width: 100%;
+        .auth-left::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            backdrop-filter: blur(3px);
         }
 
-        .auth-header {
-            text-align: center;
-            padding: 32px 32px 24px;
-            border-bottom: 1px solid #e9ecef;
+        .auth-left-content {
+            position: relative;
+            z-index: 1;
+            max-width: 500px;
         }
 
-        .auth-logo {
-            font-size: 2.5rem;
+        .auth-left h1 {
+            font-size: 3.5rem;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .auth-left p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+
+        .auth-left .logo {
+            font-size: 4rem;
+            margin-bottom: 32px;
+        }
+
+        /* Right side - Form */
+        .auth-right {
+            flex: 1;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .auth-form-container {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .auth-form-header {
+            margin-bottom: 32px;
+        }
+
+        .auth-form-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
             margin-bottom: 8px;
         }
 
-        .auth-body {
-            padding: 32px;
+        .auth-form-header p {
+            color: #6c757d;
+            margin: 0;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border: none;
-            padding: 12px;
-            font-weight: 600;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+        .form-control {
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            font-size: 1rem;
         }
 
         .form-control:focus {
@@ -70,31 +123,151 @@
             box-shadow: 0 0 0 0.25rem rgba(0, 153, 204, 0.25);
         }
 
-        .auth-footer {
+        .form-label {
+            font-weight: 500;
+            color: #495057;
+            margin-bottom: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            padding: 14px;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 51, 102, 0.2);
+        }
+
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            border-width: 2px;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .form-text {
+            font-size: 0.875rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 24px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
             text-align: center;
-            padding: 24px 32px 32px;
-            border-top: 1px solid #e9ecef;
+            margin: 24px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .divider span {
+            padding: 0 16px;
+            color: #6c757d;
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            .auth-container {
+                flex-direction: column;
+            }
+
+            .auth-left {
+                min-height: 300px;
+                padding: 40px 20px;
+            }
+
+            .auth-left h1 {
+                font-size: 2.5rem;
+            }
+
+            .auth-left .logo {
+                font-size: 3rem;
+            }
+
+            .auth-right {
+                padding: 40px 20px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-form-container {
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .auth-left-content {
+            animation: fadeInUp 0.8s ease;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="auth-card">
-            <div class="auth-header">
-                <div class="auth-logo">
-                    <i class="bi bi-archive"></i> ArEM
+    <div class="auth-container">
+        <!-- Left Side - Image/Branding -->
+        <div class="auth-left">
+            <div class="auth-left-content">
+                <div class="logo">
+                    <i class="bi bi-archive"></i>
                 </div>
-                <p class="text-muted mb-0">Archives ENS Maroua</p>
+                <h1>ArEM</h1>
+                <p class="lead">
+                    Archives de l'École Normale Supérieure de Maroua
+                </p>
+                <p class="mt-4">
+                    Plateforme de gestion et de diffusion de la production scientifique et académique de notre institution.
+                </p>
             </div>
+        </div>
 
-            <div class="auth-body">
-                {{ $slot }}
-            </div>
-
-            <div class="auth-footer">
-                <a href="{{ route('home') }}" class="text-decoration-none text-muted">
+        <!-- Right Side - Form -->
+        <div class="auth-right">
+            <div class="auth-form-container">
+                <a href="{{ route('home') }}" class="back-link">
                     <i class="bi bi-arrow-left me-2"></i>Retour à l'accueil
                 </a>
+
+                {{ $slot }}
             </div>
         </div>
     </div>

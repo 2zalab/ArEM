@@ -108,6 +108,11 @@ class User extends Authenticatable
         return in_array($this->role, ['admin', 'moderator']);
     }
 
+    public function unreadNotificationsCount()
+    {
+        return $this->notifications()->where('is_read', false)->count();
+    }
+
     protected static function boot()
     {
         parent::boot();

@@ -84,6 +84,12 @@
         <div class="text-center text-white mb-5">
             <h1 class="display-4 fw-bold mb-3">Explorez, partagez et valorisez</h1>
             <p class="lead mb-4">la production scientifique et académique de notre institution</p>
+
+            @auth
+                <a href="{{ route('documents.create') }}" class="btn btn-light btn-lg mb-4">
+                    <i class="bi bi-plus-circle me-2"></i>Déposer un document
+                </a>
+            @endauth
         </div>
 
         <!-- Search Bar -->

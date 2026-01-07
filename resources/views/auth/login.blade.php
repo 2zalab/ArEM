@@ -1,5 +1,8 @@
 <x-guest-layout>
-    <h4 class="fw-bold mb-4">Connexion</h4>
+    <div class="auth-form-header">
+        <h2>Connexion</h2>
+        <p>Connectez-vous pour accéder à votre espace</p>
+    </div>
 
     @if (session('status'))
         <div class="alert alert-success mb-4">
