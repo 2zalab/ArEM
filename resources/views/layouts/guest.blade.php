@@ -76,8 +76,12 @@
         }
 
         .auth-left .logo {
-            font-size: 4rem;
             margin-bottom: 32px;
+        }
+
+        .auth-left .logo img {
+            max-width: 150px;
+            filter: brightness(0) invert(1);
         }
 
         /* Right side - Form */
@@ -248,7 +252,7 @@
         <div class="auth-left">
             <div class="auth-left-content">
                 <div class="logo">
-                    <i class="bi bi-archive"></i>
+                    <img src="{{ asset('images/logo.jpg') }}" alt="Logo ArEM">
                 </div>
                 <h1>ArEM</h1>
                 <p class="lead">

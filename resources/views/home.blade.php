@@ -5,9 +5,37 @@
 @section('styles')
 <style>
     .hero-section {
+        position: relative;
         background: linear-gradient(135deg, #003366 0%, #0099cc 100%);
+        background-image:
+            linear-gradient(135deg, rgba(0, 51, 102, 0.92) 0%, rgba(0, 153, 204, 0.88) 100%),
+            url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1920&h=600&fit=crop');
+        background-size: cover;
+        background-position: center;
         padding: 80px 0;
         margin-bottom: 60px;
+    }
+
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        backdrop-filter: blur(2px);
+        z-index: 0;
+    }
+
+    .hero-section > .container-fluid {
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-logo {
+        max-width: 120px;
+        margin-bottom: 20px;
+        filter: brightness(0) invert(1);
     }
 
     .search-box {
@@ -82,14 +110,9 @@
 <div class="hero-section">
     <div class="container-fluid px-5">
         <div class="text-center text-white mb-5">
+            <img src="{{ asset('images/logo.jpg') }}" alt="ArEM Logo" class="hero-logo">
             <h1 class="display-4 fw-bold mb-3">Explorez, partagez et valorisez</h1>
             <p class="lead mb-4">la production scientifique et académique de notre institution</p>
-
-            @auth
-                <a href="{{ route('documents.create') }}" class="btn btn-light btn-lg mb-4">
-                    <i class="bi bi-plus-circle me-2"></i>Déposer un document
-                </a>
-            @endauth
         </div>
 
         <!-- Search Bar -->
@@ -113,6 +136,14 @@
                 </div>
             </div>
         </form>
+
+        @auth
+            <div class="text-center mt-4">
+                <a href="{{ route('documents.create') }}" class="btn btn-light btn-lg">
+                    <i class="bi bi-plus-circle me-2"></i>Déposer un document
+                </a>
+            </div>
+        @endauth
     </div>
 </div>
 
