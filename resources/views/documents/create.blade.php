@@ -38,7 +38,7 @@
                                 @foreach($documentTypes as $type)
                                     <option
                                         value="{{ $type->id }}"
-                                        data-required-fields="{{ $type->required_fields ? json_encode($type->required_fields) : 'null' }}"
+                                        data-required-fields="{{ is_null($type->required_fields) ? 'null' : json_encode($type->required_fields) }}"
                                         {{ old('document_type_id') == $type->id ? 'selected' : '' }}
                                     >
                                         {{ $type->name }}
@@ -370,17 +370,23 @@ function updateRequiredFields() {
 
     if (requiredFields && requiredFields !== 'null') {
         const fields = JSON.parse(requiredFields);
-        metadataFieldsDiv.innerHTML = '';
 
-        fields.forEach(fieldName => {
-            const field = metadataFields[fieldName];
-            if (field) {
-                const fieldHtml = createFieldHTML(fieldName, field);
-                metadataFieldsDiv.innerHTML += fieldHtml;
-            }
-        });
+        // Vérifier que le tableau n'est pas vide
+        if (fields && fields.length > 0) {
+            metadataFieldsDiv.innerHTML = '';
 
-        metadataCard.style.display = 'block';
+            fields.forEach(fieldName => {
+                const field = metadataFields[fieldName];
+                if (field) {
+                    const fieldHtml = createFieldHTML(fieldName, field);
+                    metadataFieldsDiv.innerHTML += fieldHtml;
+                }
+            });
+
+            metadataCard.style.display = 'block';
+        } else {
+            metadataCard.style.display = 'none';
+        }
     } else {
         metadataCard.style.display = 'none';
     }
