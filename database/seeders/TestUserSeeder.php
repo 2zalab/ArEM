@@ -15,7 +15,7 @@ class TestUserSeeder extends Seeder
 
         // Admin user
         User::create([
-            'name' => 'Administrateur Principal',
+            'name' => 'Admin Principal',
             'email' => 'admin@ens-maroua.cm',
             'password' => Hash::make('password'),
             'role' => 'admin',
@@ -25,8 +25,8 @@ class TestUserSeeder extends Seeder
 
         // Moderators
         $moderators = [
-            ['name' => 'Dr. Marie Kouam', 'email' => 'marie.kouam@ens-maroua.cm', 'dept' => 'Sciences de l\'Éducation'],
-            ['name' => 'Prof. Jean Ngando', 'email' => 'jean.ngando@ens-maroua.cm', 'dept' => 'Mathématiques'],
+            ['name' => 'Isaac', 'email' => 'isaac@ens-maroua.cm', 'dept' => 'Sciences de l\'Éducation'],
+            ['name' => 'Touza', 'email' => 'touzaisaac@gmail.com', 'dept' => 'Informatique'],
         ];
 
         foreach ($moderators as $mod) {
@@ -37,47 +37,6 @@ class TestUserSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'role' => 'moderator',
                 'department_id' => $dept ? $dept->id : $departments->random()->id,
-                'email_verified_at' => now(),
-            ]);
-        }
-
-        // Depositors (enseignants et chercheurs)
-        $depositors = [
-            ['name' => 'Dr. Pascal Mohamadou', 'dept' => 'Informatique'],
-            ['name' => 'Dr. Aïcha Bello', 'dept' => 'Physique-Chimie'],
-            ['name' => 'Dr. Emmanuel Nana', 'dept' => 'Sciences de la Vie et de la Terre'],
-            ['name' => 'Dr. Fatima Alhadji', 'dept' => 'Lettres et Sciences Humaines'],
-            ['name' => 'M. Ibrahim Sali', 'dept' => 'Mathématiques'],
-        ];
-
-        foreach ($depositors as $dep) {
-            $dept = $departments->where('name', $dep['dept'])->first();
-            User::create([
-                'name' => $dep['name'],
-                'email' => strtolower(str_replace([' ', '.', 'Dr. ', 'M. '], ['', '', '', ''], $dep['name'])) . '@ens-maroua.cm',
-                'password' => Hash::make('password'),
-                'role' => 'depositor',
-                'department_id' => $dept ? $dept->id : $departments->random()->id,
-                'email_verified_at' => now(),
-            ]);
-        }
-
-        // Readers (étudiants)
-        $readers = [
-            'Aminatou Abdoulaye',
-            'Bouba Hamadou',
-            'Claire Tchakounte',
-            'Daniel Ndjana',
-            'Esther Manga',
-        ];
-
-        foreach ($readers as $reader) {
-            User::create([
-                'name' => $reader,
-                'email' => strtolower(str_replace(' ', '', $reader)) . '@ens-maroua.cm',
-                'password' => Hash::make('password'),
-                'role' => 'reader',
-                'department_id' => $departments->random()->id,
                 'email_verified_at' => now(),
             ]);
         }
