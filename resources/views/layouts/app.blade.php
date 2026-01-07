@@ -108,7 +108,7 @@
 
     <main>
         @if(session('success'))
-            <div class="container px-5 mt-4">
+            <div class="container-fluid px-5 mt-4">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <i class="bi bi-check-circle me-2"></i>{{ session('success') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -117,7 +117,7 @@
         @endif
 
         @if(session('error'))
-            <div class="container px-5 mt-4">
+            <div class="container-fluid px-5 mt-4">
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <i class="bi bi-exclamation-triangle me-2"></i>{{ session('error') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -129,7 +129,7 @@
     </main>
 
     <footer class="py-5">
-        <div class="container px-5">
+        <div class="container-fluid px-5">
             <div class="row g-4">
                 <div class="col-lg-4">
                     <h5 class="fw-bold mb-3">
