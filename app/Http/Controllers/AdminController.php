@@ -118,10 +118,18 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'code' => 'required|string|max:50|unique:document_types,code',
-            'required_fields' => 'nullable|json',
+            'description' => 'nullable|string',
+            'required_fields' => 'nullable|array',
         ]);
 
-        DocumentType::create($request->only(['name', 'code', 'required_fields']));
+        $data = $request->only(['name', 'code', 'description']);
+
+        // Convert required_fields array to JSON if present
+        if ($request->has('required_fields') && is_array($request->required_fields)) {
+            $data['required_fields'] = json_encode($request->required_fields);
+        }
+
+        DocumentType::create($data);
 
         return redirect()->route('admin.documentTypes')->with('success', 'Type de document créé avec succès');
     }
@@ -133,11 +141,24 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'code' => 'required|string|max:50|unique:document_types,code,' . $id,
-            'required_fields' => 'nullable|json',
+            'description' => 'nullable|string',
+            'required_fields' => 'nullable|array',
             'is_active' => 'boolean',
         ]);
 
-        $documentType->update($request->only(['name', 'code', 'required_fields', 'is_active']));
+        $data = $request->only(['name', 'code', 'description']);
+
+        // Convert required_fields array to JSON if present
+        if ($request->has('required_fields') && is_array($request->required_fields)) {
+            $data['required_fields'] = json_encode($request->required_fields);
+        } else {
+            $data['required_fields'] = null;
+        }
+
+        // Handle is_active checkbox
+        $data['is_active'] = $request->has('is_active') ? true : false;
+
+        $documentType->update($data);
 
         return redirect()->route('admin.documentTypes')->with('success', 'Type de document mis à jour avec succès');
     }
