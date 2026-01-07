@@ -94,7 +94,10 @@ class DocumentTypeSeeder extends Seeder
         ];
 
         foreach ($documentTypes as $type) {
-            \App\Models\DocumentType::create($type);
+            \App\Models\DocumentType::updateOrCreate(
+                ['code' => $type['code']], // Clé unique
+                $type // Données à créer ou mettre à jour
+            );
         }
     }
 }
