@@ -15,11 +15,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Seed Departments and Document Types first
+        $this->call([
+            DepartmentSeeder::class,
+            DocumentTypeSeeder::class,
+        ]);
 
+        // Create a test admin user
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Admin ArEM',
+            'email' => 'admin@ens-maroua.cm',
+            'role' => 'admin',
+            'status' => 'Administrateur',
         ]);
     }
 }
