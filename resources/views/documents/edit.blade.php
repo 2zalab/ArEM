@@ -71,12 +71,12 @@
                                     id="keywords_input"
                                     placeholder="Tapez un mot-clé et appuyez sur Entrée ou virgule"
                                 >
-                                <input type="hidden" name="keywords" id="keywords_hidden" value="{{ old('keywords', implode(', ', $document->keywords ?? [])) }}" required>
                                 <div class="form-text">Appuyez sur Entrée ou tapez une virgule pour ajouter un mot-clé</div>
                                 @error('keywords')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                                 <div id="keywords-badges" class="mt-2"></div>
+                                <div id="keywords-inputs"></div>
                             </div>
 
                             <div class="col-md-6 mb-3">
@@ -271,18 +271,21 @@ function displayFileInfo() {
 let keywordsArray = [];
 
 function renderKeywordBadges() {
-    const container = document.getElementById('keywords-badges');
-    const hiddenInput = document.getElementById('keywords_hidden');
+    const badgesContainer = document.getElementById('keywords-badges');
+    const inputsContainer = document.getElementById('keywords-inputs');
 
-    container.innerHTML = keywordsArray.map((keyword, index) => `
+    // Render badges
+    badgesContainer.innerHTML = keywordsArray.map((keyword, index) => `
         <span class="badge bg-secondary me-2 mb-2" style="font-size: 0.95rem; padding: 0.5rem 0.75rem;">
             ${keyword}
             <i class="bi bi-x-circle ms-1" style="cursor: pointer;" onclick="removeKeyword(${index})"></i>
         </span>
     `).join('');
 
-    // Update hidden input with comma-separated keywords
-    hiddenInput.value = keywordsArray.join(', ');
+    // Create hidden inputs as array
+    inputsContainer.innerHTML = keywordsArray.map((keyword, index) => `
+        <input type="hidden" name="keywords[${index}]" value="${keyword}">
+    `).join('');
 }
 
 function removeKeyword(index) {
@@ -332,10 +335,14 @@ document.getElementById('keywords_input').addEventListener('input', function(e) 
 document.addEventListener('DOMContentLoaded', function() {
     toggleEmbargoDate();
 
-    // Load existing keywords from hidden input
-    const hiddenInput = document.getElementById('keywords_hidden');
-    if (hiddenInput.value) {
-        keywordsArray = hiddenInput.value.split(',').map(k => k.trim()).filter(k => k.length > 0);
+    // Load existing keywords from old() or document data
+    @if(old('keywords'))
+        keywordsArray = @json(old('keywords'));
+    @elseif(isset($document->keywords))
+        keywordsArray = @json($document->keywords ?? []);
+    @endif
+
+    if (keywordsArray.length > 0) {
         renderKeywordBadges();
     }
 
