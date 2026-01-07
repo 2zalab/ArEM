@@ -15,6 +15,8 @@ class Document extends Model
         'department_id',
         'document_type_id',
         'title',
+        'authors',
+        'citation',
         'abstract',
         'keywords',
         'language',
@@ -35,6 +37,7 @@ class Document extends Model
     ];
 
     protected $casts = [
+        'authors' => 'array',
         'keywords' => 'array',
         'validated_at' => 'datetime',
         'published_at' => 'datetime',
@@ -152,6 +155,94 @@ class Document extends Model
         return false;
     }
 
+    public function generateCitation()
+    {
+        if (!$this->authors || count($this->authors) === 0) {
+            return null;
+        }
+
+        $citation = '';
+
+        // Format des auteurs
+        $authors = [];
+        foreach ($this->authors as $author) {
+            $name = $author['name'] ?? '';
+            if ($name) {
+                // Format: Nom, Initiale.
+                $nameParts = explode(' ', trim($name));
+                if (count($nameParts) > 1) {
+                    $lastName = array_pop($nameParts);
+                    $initials = implode('. ', array_map(fn($n) => substr($n, 0, 1), $nameParts)) . '.';
+                    $authors[] = $lastName . ', ' . $initials;
+                } else {
+                    $authors[] = $name;
+                }
+            }
+        }
+
+        if (count($authors) === 1) {
+            $citation .= $authors[0];
+        } elseif (count($authors) === 2) {
+            $citation .= $authors[0] . ' & ' . $authors[1];
+        } elseif (count($authors) > 2) {
+            $citation .= $authors[0] . ' et al.';
+        }
+
+        // Année
+        $citation .= ' (' . ($this->year ?? date('Y')) . '). ';
+
+        // Titre
+        $citation .= $this->title . '. ';
+
+        // Informations spécifiques selon le type
+        if ($this->documentType && $this->metadata) {
+            $type = $this->documentType->code;
+            $meta = $this->metadata;
+
+            // Article scientifique
+            if ($type === 'article' && isset($meta['journal'])) {
+                $citation .= '<em>' . $meta['journal'] . '</em>';
+
+                if (isset($meta['volume'])) {
+                    $citation .= ', <em>' . $meta['volume'] . '</em>';
+                }
+
+                if (isset($meta['issue'])) {
+                    $citation .= '(' . $meta['issue'] . ')';
+                }
+
+                if (isset($meta['pages'])) {
+                    $citation .= ', ' . $meta['pages'];
+                }
+
+                $citation .= '. ';
+
+                if (isset($meta['doi'])) {
+                    $citation .= 'https://doi.org/' . $meta['doi'];
+                }
+            }
+            // Mémoire/Thèse
+            elseif (in_array($type, ['memoire_licence', 'memoire_master', 'these_doctorat', 'memoire_dipes_ii'])) {
+                $citation .= '[' . $this->documentType->name . ']. ';
+                $citation .= 'École Normale Supérieure de Maroua. ';
+            }
+            // Autres types
+            else {
+                $citation .= $this->documentType->name . '. ';
+            }
+        }
+
+        // Institution
+        $citation .= 'Archive ArEM-ENS Maroua. ';
+
+        // URL permanente
+        if ($this->permanent_url) {
+            $citation .= $this->permanent_url;
+        }
+
+        return $citation;
+    }
+
     protected static function boot()
     {
         parent::boot();
@@ -163,6 +254,18 @@ class Document extends Model
 
             if (!$document->permanent_url) {
                 $document->permanent_url = url('/documents/' . $document->arem_doc_id);
+            }
+
+            // Générer la citation automatiquement
+            if (!$document->citation) {
+                $document->citation = $document->generateCitation();
+            }
+        });
+
+        static::updating(function ($document) {
+            // Régénérer la citation si les auteurs ou métadonnées changent
+            if ($document->isDirty(['authors', 'title', 'year'])) {
+                $document->citation = $document->generateCitation();
             }
         });
     }

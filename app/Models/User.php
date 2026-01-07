@@ -29,7 +29,12 @@ class User extends Authenticatable
         'institutional_email',
         'phone',
         'profile_photo',
+        'institution',
+        'user_type',
+        'grade',
+        'education_level',
         'bio',
+        'research_interests',
         'is_active',
     ];
 
