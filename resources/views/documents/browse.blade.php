@@ -3,7 +3,7 @@
 @section('title', 'Parcourir les documents - ArEM')
 
 @section('content')
-<div class="container px-5 py-5">
+<div class="container-fluid px-5 py-5">
     <h1 class="fw-bold mb-4">Parcourir les documents</h1>
 
     <div class="btn-group mb-4" role="group">

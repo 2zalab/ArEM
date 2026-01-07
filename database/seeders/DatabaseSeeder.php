@@ -19,14 +19,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             DepartmentSeeder::class,
             DocumentTypeSeeder::class,
-        ]);
-
-        // Create a test admin user
-        User::factory()->create([
-            'name' => 'Admin ArEM',
-            'email' => 'admin@ens-maroua.cm',
-            'role' => 'admin',
-            'status' => 'Administrateur',
+            TestUserSeeder::class,
+            TestDocumentSeeder::class,
         ]);
     }
 }

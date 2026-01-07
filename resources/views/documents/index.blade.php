@@ -3,7 +3,7 @@
 @section('title', 'Documents - ArEM')
 
 @section('content')
-<div class="container px-5 py-5">
+<div class="container-fluid px-5 py-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="fw-bold mb-2">Documents archivés</h1>

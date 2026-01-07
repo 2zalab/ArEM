@@ -3,7 +3,7 @@
 @section('title', $document->title . ' - ArEM')
 
 @section('content')
-<div class="container px-5 py-5">
+<div class="container-fluid px-5 py-5">
     <div class="row">
         <div class="col-lg-8">
             <!-- Document Header -->

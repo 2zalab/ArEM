@@ -3,7 +3,7 @@
 @section('title', 'À propos - ArEM')
 
 @section('content')
-<div class="container px-5 py-5">
+<div class="container-fluid px-5 py-5">
     <div class="row justify-content-center">
         <div class="col-lg-10">
             <h1 class="display-4 fw-bold mb-4">À propos d'ArEM</h1>
