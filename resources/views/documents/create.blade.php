@@ -38,7 +38,7 @@
                                 @foreach($documentTypes as $type)
                                     <option
                                         value="{{ $type->id }}"
-                                        data-required-fields="{{ $type->required_fields }}"
+                                        data-required-fields="{{ $type->required_fields ? json_encode($type->required_fields) : 'null' }}"
                                         {{ old('document_type_id') == $type->id ? 'selected' : '' }}
                                     >
                                         {{ $type->name }}
