@@ -19,28 +19,29 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 Route::get('/search/advanced', [SearchController::class, 'advanced'])->name('search.advanced');
 
-// Public document routes
+// Document routes - IMPORTANT: specific routes BEFORE parameterized routes
 Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
 Route::get('/documents/browse', [DocumentController::class, 'browse'])->name('documents.browse');
-Route::get('/documents/{aremDocId}', [DocumentController::class, 'show'])->name('documents.show');
+Route::get('/documents/create', [DocumentController::class, 'create'])->middleware(['auth', 'verified'])->name('documents.create');
+Route::post('/documents', [DocumentController::class, 'store'])->middleware(['auth', 'verified'])->name('documents.store');
 Route::get('/documents/{aremDocId}/download', [DocumentController::class, 'download'])->name('documents.download');
+Route::get('/documents/{aremDocId}/edit', [DocumentController::class, 'edit'])->middleware(['auth', 'verified'])->name('documents.edit');
+Route::patch('/documents/{aremDocId}', [DocumentController::class, 'update'])->middleware(['auth', 'verified'])->name('documents.update');
+Route::delete('/documents/{aremDocId}', [DocumentController::class, 'destroy'])->middleware(['auth', 'verified'])->name('documents.destroy');
+Route::get('/documents/{aremDocId}', [DocumentController::class, 'show'])->name('documents.show');
 
 // Authenticated routes
 Route::middleware(['auth', 'verified'])->group(function () {
-    // Dashboard
+    // Dashboard - redirect to profile documents
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return redirect()->route('profile.documents');
     })->name('dashboard');
 
-    // Document management
-    Route::get('/documents/create', [DocumentController::class, 'create'])->name('documents.create');
-    Route::post('/documents', [DocumentController::class, 'store'])->name('documents.store');
-    Route::get('/documents/{aremDocId}/edit', [DocumentController::class, 'edit'])->name('documents.edit');
-    Route::patch('/documents/{aremDocId}', [DocumentController::class, 'update'])->name('documents.update');
-    Route::delete('/documents/{aremDocId}', [DocumentController::class, 'destroy'])->name('documents.destroy');
-
-    // Profile
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Profile - redirect /profile to /profile/documents
+    Route::get('/profile', function () {
+        return redirect()->route('profile.documents');
+    })->name('profile');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/profile/documents', [ProfileController::class, 'documents'])->name('profile.documents');
