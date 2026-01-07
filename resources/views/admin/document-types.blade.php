@@ -161,30 +161,262 @@
 
                                                 <div class="mb-3">
                                                     <label class="form-label fw-bold">Champs de métadonnées requis</label>
-                                                    <div class="form-text mb-2">Sélectionnez les champs qui seront obligatoires</div>
+                                                    <div class="form-text mb-2">Sélectionnez les champs qui seront obligatoires lors du dépôt de ce type de document</div>
                                                     <div class="small text-muted mb-2">
                                                         <strong>Actuellement sélectionnés :</strong> {{ count($typeFields) }} champ(s)
                                                     </div>
 
-                                                    <!-- Afficher uniquement les champs sélectionnés avec possibilité de les décocher -->
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            @foreach(['supervisor', 'co_supervisor', 'specialty', 'defense_date', 'jury', 'director', 'doctoral_school', 'journal', 'issn', 'doi', 'volume', 'issue', 'pages', 'publication_date', 'publication_status', 'host_institution', 'stage_period', 'stage_supervisor', 'project_type', 'partners', 'course_level', 'semester', 'course_type', 'credits', 'event_name', 'event_date', 'event_location', 'presentation_type', 'issuing_body', 'report_period', 'report_type', 'document_type', 'issuing_authority', 'reference_number', 'data_type', 'collection_method', 'data_format', 'sample_size', 'collection_period'] as $field)
-                                                                @if(in_array($field, $typeFields))
-                                                                    <div class="form-check form-check-inline mb-2">
-                                                                        <input class="form-check-input" type="checkbox" name="required_fields[]" value="{{ $field }}" id="edit_field_{{ $field }}_{{ $type->id }}" checked>
-                                                                        <label class="form-check-label" for="edit_field_{{ $field }}_{{ $type->id }}">
-                                                                            <span class="badge bg-success">{{ $field }}</span>
-                                                                        </label>
+                                                    <div class="accordion" id="editFieldsAccordion{{ $type->id }}">
+                                                        <!-- Mémoires et Thèses -->
+                                                        <div class="accordion-item">
+                                                            <h2 class="accordion-header">
+                                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#editFieldsMemoires{{ $type->id }}">
+                                                                    Mémoires et Thèses
+                                                                </button>
+                                                            </h2>
+                                                            <div id="editFieldsMemoires{{ $type->id }}" class="accordion-collapse collapse" data-bs-parent="#editFieldsAccordion{{ $type->id }}">
+                                                                <div class="accordion-body">
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="supervisor" id="edit_supervisor_{{ $type->id }}" {{ in_array('supervisor', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_supervisor_{{ $type->id }}">Directeur/Superviseur</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="co_supervisor" id="edit_co_supervisor_{{ $type->id }}" {{ in_array('co_supervisor', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_co_supervisor_{{ $type->id }}">Co-superviseur</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="specialty" id="edit_specialty_{{ $type->id }}" {{ in_array('specialty', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_specialty_{{ $type->id }}">Spécialité</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="defense_date" id="edit_defense_date_{{ $type->id }}" {{ in_array('defense_date', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_defense_date_{{ $type->id }}">Date de soutenance</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="jury" id="edit_jury_{{ $type->id }}" {{ in_array('jury', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_jury_{{ $type->id }}">Membres du jury</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="director" id="edit_director_{{ $type->id }}" {{ in_array('director', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_director_{{ $type->id }}">Directeur de thèse</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="doctoral_school" id="edit_doctoral_school_{{ $type->id }}" {{ in_array('doctoral_school', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_doctoral_school_{{ $type->id }}">École doctorale</label>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                @endif
-                                                            @endforeach
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="alert alert-warning mt-2">
-                                                        <i class="bi bi-exclamation-triangle me-2"></i>
-                                                        <small>Pour ajouter de nouveaux champs, veuillez utiliser le seeder ou créer un nouveau type.</small>
+                                                        <!-- Articles scientifiques -->
+                                                        <div class="accordion-item">
+                                                            <h2 class="accordion-header">
+                                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#editFieldsArticles{{ $type->id }}">
+                                                                    Articles scientifiques
+                                                                </button>
+                                                            </h2>
+                                                            <div id="editFieldsArticles{{ $type->id }}" class="accordion-collapse collapse" data-bs-parent="#editFieldsAccordion{{ $type->id }}">
+                                                                <div class="accordion-body">
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="journal" id="edit_journal_{{ $type->id }}" {{ in_array('journal', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_journal_{{ $type->id }}">Nom de la revue</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="issn" id="edit_issn_{{ $type->id }}" {{ in_array('issn', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_issn_{{ $type->id }}">ISSN</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="doi" id="edit_doi_{{ $type->id }}" {{ in_array('doi', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_doi_{{ $type->id }}">DOI</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="volume" id="edit_volume_{{ $type->id }}" {{ in_array('volume', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_volume_{{ $type->id }}">Volume</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="issue" id="edit_issue_{{ $type->id }}" {{ in_array('issue', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_issue_{{ $type->id }}">Numéro</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="pages" id="edit_pages_{{ $type->id }}" {{ in_array('pages', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_pages_{{ $type->id }}">Pages</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="publication_date" id="edit_publication_date_{{ $type->id }}" {{ in_array('publication_date', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_publication_date_{{ $type->id }}">Date de publication</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="publication_status" id="edit_publication_status_{{ $type->id }}" {{ in_array('publication_status', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_publication_status_{{ $type->id }}">Statut de publication</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Stages et Projets -->
+                                                        <div class="accordion-item">
+                                                            <h2 class="accordion-header">
+                                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#editFieldsStages{{ $type->id }}">
+                                                                    Stages et Projets
+                                                                </button>
+                                                            </h2>
+                                                            <div id="editFieldsStages{{ $type->id }}" class="accordion-collapse collapse" data-bs-parent="#editFieldsAccordion{{ $type->id }}">
+                                                                <div class="accordion-body">
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="host_institution" id="edit_host_institution_{{ $type->id }}" {{ in_array('host_institution', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_host_institution_{{ $type->id }}">Structure d'accueil</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="stage_period" id="edit_stage_period_{{ $type->id }}" {{ in_array('stage_period', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_stage_period_{{ $type->id }}">Période du stage</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="stage_supervisor" id="edit_stage_supervisor_{{ $type->id }}" {{ in_array('stage_supervisor', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_stage_supervisor_{{ $type->id }}">Maître de stage</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="project_type" id="edit_project_type_{{ $type->id }}" {{ in_array('project_type', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_project_type_{{ $type->id }}">Type de projet</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="partners" id="edit_partners_{{ $type->id }}" {{ in_array('partners', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_partners_{{ $type->id }}">Partenaires</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Cours et Communications -->
+                                                        <div class="accordion-item">
+                                                            <h2 class="accordion-header">
+                                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#editFieldsCours{{ $type->id }}">
+                                                                    Cours et Communications
+                                                                </button>
+                                                            </h2>
+                                                            <div id="editFieldsCours{{ $type->id }}" class="accordion-collapse collapse" data-bs-parent="#editFieldsAccordion{{ $type->id }}">
+                                                                <div class="accordion-body">
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="course_level" id="edit_course_level_{{ $type->id }}" {{ in_array('course_level', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_course_level_{{ $type->id }}">Niveau</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="semester" id="edit_semester_{{ $type->id }}" {{ in_array('semester', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_semester_{{ $type->id }}">Semestre</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="course_type" id="edit_course_type_{{ $type->id }}" {{ in_array('course_type', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_course_type_{{ $type->id }}">Type de cours</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="credits" id="edit_credits_{{ $type->id }}" {{ in_array('credits', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_credits_{{ $type->id }}">Crédits</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="event_name" id="edit_event_name_{{ $type->id }}" {{ in_array('event_name', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_event_name_{{ $type->id }}">Nom de l'événement</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="event_date" id="edit_event_date_{{ $type->id }}" {{ in_array('event_date', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_event_date_{{ $type->id }}">Date de l'événement</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="event_location" id="edit_event_location_{{ $type->id }}" {{ in_array('event_location', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_event_location_{{ $type->id }}">Lieu de l'événement</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="presentation_type" id="edit_presentation_type_{{ $type->id }}" {{ in_array('presentation_type', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_presentation_type_{{ $type->id }}">Type de présentation</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Documents administratifs et Données -->
+                                                        <div class="accordion-item">
+                                                            <h2 class="accordion-header">
+                                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#editFieldsAdmin{{ $type->id }}">
+                                                                    Documents administratifs et Données
+                                                                </button>
+                                                            </h2>
+                                                            <div id="editFieldsAdmin{{ $type->id }}" class="accordion-collapse collapse" data-bs-parent="#editFieldsAccordion{{ $type->id }}">
+                                                                <div class="accordion-body">
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="issuing_body" id="edit_issuing_body_{{ $type->id }}" {{ in_array('issuing_body', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_issuing_body_{{ $type->id }}">Organe émetteur</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="report_period" id="edit_report_period_{{ $type->id }}" {{ in_array('report_period', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_report_period_{{ $type->id }}">Période du rapport</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="report_type" id="edit_report_type_{{ $type->id }}" {{ in_array('report_type', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_report_type_{{ $type->id }}">Type de rapport</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="document_type" id="edit_document_type_{{ $type->id }}" {{ in_array('document_type', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_document_type_{{ $type->id }}">Type de document</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="issuing_authority" id="edit_issuing_authority_{{ $type->id }}" {{ in_array('issuing_authority', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_issuing_authority_{{ $type->id }}">Autorité émettrice</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="reference_number" id="edit_reference_number_{{ $type->id }}" {{ in_array('reference_number', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_reference_number_{{ $type->id }}">Numéro de référence</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="data_type" id="edit_data_type_{{ $type->id }}" {{ in_array('data_type', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_data_type_{{ $type->id }}">Type de données</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="collection_method" id="edit_collection_method_{{ $type->id }}" {{ in_array('collection_method', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_collection_method_{{ $type->id }}">Méthode de collecte</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="data_format" id="edit_data_format_{{ $type->id }}" {{ in_array('data_format', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_data_format_{{ $type->id }}">Format des données</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="sample_size" id="edit_sample_size_{{ $type->id }}" {{ in_array('sample_size', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_sample_size_{{ $type->id }}">Taille de l'échantillon</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" name="required_fields[]" value="collection_period" id="edit_collection_period_{{ $type->id }}" {{ in_array('collection_period', $typeFields) ? 'checked' : '' }}>
+                                                                                <label class="form-check-label" for="edit_collection_period_{{ $type->id }}">Période de collecte</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
 
