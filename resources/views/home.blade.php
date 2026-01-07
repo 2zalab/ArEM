@@ -80,7 +80,7 @@
 @section('content')
 <!-- Hero Section -->
 <div class="hero-section">
-    <div class="container px-5">
+    <div class="container-fluid px-5">
         <div class="text-center text-white mb-5">
             <h1 class="display-4 fw-bold mb-3">Explorez, partagez et valorisez</h1>
             <p class="lead mb-4">la production scientifique et académique de notre institution</p>
@@ -111,7 +111,7 @@
 </div>
 
 <!-- Statistics -->
-<div class="container px-5 mb-5">
+<div class="container-fluid px-5 mb-5">
     <div class="row g-4">
         <div class="col-lg-3 col-md-6">
             <div class="stat-card">
@@ -145,7 +145,7 @@
 </div>
 
 <!-- Main Content -->
-<div class="container px-5">
+<div class="container-fluid px-5">
     <div class="row g-4">
         <!-- Recent Documents -->
         <div class="col-lg-8">
