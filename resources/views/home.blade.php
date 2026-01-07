@@ -8,8 +8,8 @@
         position: relative;
         background: linear-gradient(135deg, #003366 0%, #0099cc 100%);
         background-image:
-            linear-gradient(135deg, rgba(0, 51, 102, 0.92) 0%, rgba(0, 153, 204, 0.88) 100%),
-            url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1920&h=600&fit=crop');
+            linear-gradient(135deg, rgba(0, 51, 102, 0.92) 0%, rgba(0, 153, 204, 0) 100%),
+            url('/images/univ-maroua.jpg');
         background-size: cover;
         background-position: center;
         padding: 80px 0;
