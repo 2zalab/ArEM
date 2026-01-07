@@ -64,20 +64,19 @@
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="keywords" class="form-label fw-bold">Mots-clés *</label>
+                                <label for="keywords_input" class="form-label fw-bold">Mots-clés *</label>
                                 <input
                                     type="text"
                                     class="form-control @error('keywords') is-invalid @enderror"
                                     id="keywords_input"
-                                    name="keywords_input"
-                                    value="{{ old('keywords_input', implode(', ', $document->keywords ?? [])) }}"
-                                    placeholder="Ex: éducation, sciences, recherche"
+                                    placeholder="Tapez un mot-clé et appuyez sur Entrée ou virgule"
                                 >
-                                <div class="form-text">Séparez les mots-clés par des virgules</div>
+                                <input type="hidden" name="keywords" id="keywords_hidden" value="{{ old('keywords', implode(', ', $document->keywords ?? [])) }}" required>
+                                <div class="form-text">Appuyez sur Entrée ou tapez une virgule pour ajouter un mot-clé</div>
                                 @error('keywords')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
-                                <div id="keywords-container" class="mt-2"></div>
+                                <div id="keywords-badges" class="mt-2"></div>
                             </div>
 
                             <div class="col-md-6 mb-3">
@@ -268,34 +267,76 @@ function displayFileInfo() {
     }
 }
 
-// Keywords handling
+// Keywords handling with interactive badges
+let keywordsArray = [];
+
+function renderKeywordBadges() {
+    const container = document.getElementById('keywords-badges');
+    const hiddenInput = document.getElementById('keywords_hidden');
+
+    container.innerHTML = keywordsArray.map((keyword, index) => `
+        <span class="badge bg-secondary me-2 mb-2" style="font-size: 0.95rem; padding: 0.5rem 0.75rem;">
+            ${keyword}
+            <i class="bi bi-x-circle ms-1" style="cursor: pointer;" onclick="removeKeyword(${index})"></i>
+        </span>
+    `).join('');
+
+    // Update hidden input with comma-separated keywords
+    hiddenInput.value = keywordsArray.join(', ');
+}
+
+function removeKeyword(index) {
+    keywordsArray.splice(index, 1);
+    renderKeywordBadges();
+}
+
+function addKeyword(keyword) {
+    keyword = keyword.trim();
+    if (keyword && !keywordsArray.includes(keyword)) {
+        keywordsArray.push(keyword);
+        renderKeywordBadges();
+    }
+}
+
+document.getElementById('keywords_input').addEventListener('keydown', function(e) {
+    const value = e.target.value.trim();
+
+    // Add keyword on Enter or comma
+    if (e.key === 'Enter' || e.key === ',') {
+        e.preventDefault();
+        if (value) {
+            addKeyword(value);
+            e.target.value = '';
+        }
+    }
+    // Remove last keyword on Backspace if input is empty
+    else if (e.key === 'Backspace' && !e.target.value) {
+        if (keywordsArray.length > 0) {
+            keywordsArray.pop();
+            renderKeywordBadges();
+        }
+    }
+});
+
+// Also handle comma typed in input (for paste scenarios)
 document.getElementById('keywords_input').addEventListener('input', function(e) {
-    const keywords = e.target.value.split(',').map(k => k.trim()).filter(k => k.length > 0);
-    const container = document.getElementById('keywords-container');
-
-    container.innerHTML = keywords.map(keyword => `
-        <span class="badge bg-primary me-2 mb-2">${keyword}</span>
-    `).join('');
-
-    // Create hidden input for keywords array
-    const hiddenInputs = keywords.map((keyword, index) => `
-        <input type="hidden" name="keywords[${index}]" value="${keyword}">
-    `).join('');
-
-    const existingHidden = document.querySelectorAll('input[name^="keywords["]');
-    existingHidden.forEach(input => input.remove());
-
-    container.innerHTML += hiddenInputs;
+    const value = e.target.value;
+    if (value.includes(',')) {
+        const parts = value.split(',');
+        parts.slice(0, -1).forEach(part => addKeyword(part));
+        e.target.value = parts[parts.length - 1];
+    }
 });
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
     toggleEmbargoDate();
 
-    // Trigger keywords display if value exists
-    const keywordsInput = document.getElementById('keywords_input');
-    if (keywordsInput.value) {
-        keywordsInput.dispatchEvent(new Event('input'));
+    // Load existing keywords from hidden input
+    const hiddenInput = document.getElementById('keywords_hidden');
+    if (hiddenInput.value) {
+        keywordsArray = hiddenInput.value.split(',').map(k => k.trim()).filter(k => k.length > 0);
+        renderKeywordBadges();
     }
 
     // Add change listener to all access_rights radio buttons

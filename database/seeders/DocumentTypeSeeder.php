@@ -79,6 +79,18 @@ class DocumentTypeSeeder extends Seeder
                 'description' => 'Jeux de données scientifiques',
                 'required_fields' => json_encode(['data_type', 'collection_method', 'data_format'])
             ],
+            [
+                'name' => 'Mémoire de DIPES II',
+                'code' => 'memoire_dipes_ii',
+                'description' => 'Mémoire de fin d\'études du DIPES II (Diplôme de Professeur de l\'Enseignement Secondaire)',
+                'required_fields' => json_encode(['supervisor', 'specialty', 'defense_date', 'jury'])
+            ],
+            [
+                'name' => 'Article de blog',
+                'code' => 'blog_article',
+                'description' => 'Article de vulgarisation ou de blog scientifique',
+                'required_fields' => null
+            ],
         ];
 
         foreach ($documentTypes as $type) {
