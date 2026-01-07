@@ -77,7 +77,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
-        <div class="container px-5">
+        <div class="container-fluid px-5">
             <a class="navbar-brand" href="{{ route('home') }}">
                 <i class="bi bi-archive"></i> ArEM
             </a>
