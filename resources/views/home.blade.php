@@ -137,13 +137,11 @@
             </div>
         </form>
 
-        @auth
-            <div class="text-center mt-4">
-                <a href="{{ route('documents.create') }}" class="btn btn-light btn-lg">
-                    <i class="bi bi-plus-circle me-2"></i>Déposer un document
-                </a>
-            </div>
-        @endauth
+        <div class="text-center mt-4">
+            <a href="{{ route('documents.create') }}" class="btn btn-light btn-lg">
+                <i class="bi bi-plus-circle me-2"></i>Déposer un document
+            </a>
+        </div>
     </div>
 </div>
 
