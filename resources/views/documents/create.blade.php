@@ -302,32 +302,62 @@
 <script>
 // Metadata field definitions
 const metadataFields = {
+    // Champs pour mémoires et thèses
     'supervisor': { label: 'Directeur/Superviseur', type: 'text', required: true },
     'co_supervisor': { label: 'Co-superviseur', type: 'text', required: false },
     'specialty': { label: 'Spécialité', type: 'text', required: true },
     'defense_date': { label: 'Date de soutenance', type: 'date', required: true },
-    'jury': { label: 'Membres du jury', type: 'textarea', required: true },
+    'jury': { label: 'Membres du jury (séparez par des virgules)', type: 'textarea', required: true },
     'director': { label: 'Directeur de thèse', type: 'text', required: true },
     'doctoral_school': { label: 'École doctorale', type: 'text', required: true },
-    'journal': { label: 'Revue', type: 'text', required: true },
-    'issn': { label: 'ISSN', type: 'text', required: true },
-    'publication_status': { label: 'Statut de publication', type: 'select', required: true, options: ['Soumis', 'Accepté', 'Publié'] },
+
+    // Champs pour articles scientifiques
+    'journal': { label: 'Nom de la revue', type: 'text', required: true },
+    'issn': { label: 'ISSN', type: 'text', required: false },
+    'doi': { label: 'DOI (Digital Object Identifier)', type: 'text', required: false },
+    'volume': { label: 'Volume', type: 'text', required: false },
+    'issue': { label: 'Numéro', type: 'text', required: false },
+    'pages': { label: 'Pages (ex: 45-67)', type: 'text', required: false },
+    'publication_date': { label: 'Date de publication', type: 'date', required: false },
+    'publication_status': { label: 'Statut de publication', type: 'select', required: true, options: ['Soumis', 'En révision', 'Accepté', 'Publié'] },
+
+    // Champs pour stages
     'host_institution': { label: 'Structure d\'accueil', type: 'text', required: true },
-    'stage_period': { label: 'Période du stage', type: 'text', required: true },
-    'project_type': { label: 'Type de projet', type: 'text', required: true },
+    'stage_period': { label: 'Période du stage (ex: Jan-Mars 2024)', type: 'text', required: true },
+    'stage_supervisor': { label: 'Maître de stage', type: 'text', required: false },
+
+    // Champs pour projets
+    'project_type': { label: 'Type de projet', type: 'select', required: true, options: ['Individuel', 'Collectif', 'Recherche', 'Développement'] },
+    'partners': { label: 'Partenaires', type: 'text', required: false },
+
+    // Champs pour cours
     'course_level': { label: 'Niveau', type: 'text', required: true },
-    'semester': { label: 'Semestre', type: 'text', required: true },
-    'course_type': { label: 'Type de cours', type: 'text', required: true },
-    'event_name': { label: 'Nom de l\'événement', type: 'text', required: true },
+    'semester': { label: 'Semestre', type: 'select', required: true, options: ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'] },
+    'course_type': { label: 'Type de cours', type: 'select', required: true, options: ['Cours magistral', 'TD', 'TP', 'Support pédagogique'] },
+    'credits': { label: 'Nombre de crédits', type: 'number', required: false },
+
+    // Champs pour communications
+    'event_name': { label: 'Nom de l\'événement/conférence', type: 'text', required: true },
     'event_date': { label: 'Date de l\'événement', type: 'date', required: true },
     'event_location': { label: 'Lieu de l\'événement', type: 'text', required: true },
+    'presentation_type': { label: 'Type de présentation', type: 'select', required: false, options: ['Communication orale', 'Poster', 'Keynote', 'Panel'] },
+
+    // Champs pour rapports institutionnels
     'issuing_body': { label: 'Organe émetteur', type: 'text', required: true },
-    'report_period': { label: 'Période du rapport', type: 'text', required: true },
+    'report_period': { label: 'Période couverte', type: 'text', required: true },
+    'report_type': { label: 'Type de rapport', type: 'select', required: false, options: ['Annuel', 'Semestriel', 'Trimestriel', 'Ponctuel'] },
+
+    // Champs pour documents administratifs
     'document_type': { label: 'Type de document', type: 'text', required: true },
     'issuing_authority': { label: 'Autorité émettrice', type: 'text', required: true },
-    'data_type': { label: 'Type de données', type: 'text', required: true },
+    'reference_number': { label: 'Numéro de référence', type: 'text', required: false },
+
+    // Champs pour données de recherche
+    'data_type': { label: 'Type de données', type: 'select', required: true, options: ['Quantitatives', 'Qualitatives', 'Mixtes', 'Expérimentales', 'Enquêtes'] },
     'collection_method': { label: 'Méthode de collecte', type: 'text', required: true },
-    'data_format': { label: 'Format des données', type: 'text', required: true }
+    'data_format': { label: 'Format des données', type: 'text', required: true },
+    'sample_size': { label: 'Taille de l\'échantillon', type: 'text', required: false },
+    'collection_period': { label: 'Période de collecte', type: 'text', required: false }
 };
 
 function updateRequiredFields() {
