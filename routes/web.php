@@ -88,3 +88,8 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
 });
 
 require __DIR__.'/auth.php';
+
+// Debug routes (à supprimer en production)
+if (file_exists(__DIR__.'/debug.php')) {
+    require __DIR__.'/debug.php';
+}
