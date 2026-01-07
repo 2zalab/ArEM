@@ -3,7 +3,7 @@
 @section('title', 'Recherche - ArEM')
 
 @section('content')
-<div class="container px-5 py-5">
+<div class="container-fluid px-5 py-5">
     <h1 class="fw-bold mb-4">Résultats de recherche</h1>
 
     @if(request('q'))

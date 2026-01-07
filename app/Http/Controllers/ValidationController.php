@@ -10,17 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ValidationController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware(function ($request, $next) {
-            if (!Auth::user()->canValidateDocuments()) {
-                abort(403, 'Accès non autorisé');
-            }
-            return $next($request);
-        });
-    }
-
     public function index()
     {
         $pendingDocuments = Document::where('status', 'pending')

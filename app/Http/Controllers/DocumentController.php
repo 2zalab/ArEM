@@ -12,11 +12,6 @@ use Illuminate\Support\Facades\Auth;
 
 class DocumentController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth')->except(['index', 'show', 'download']);
-    }
-
     public function index(Request $request)
     {
         $query = Document::where('status', 'published')

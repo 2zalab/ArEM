@@ -3,7 +3,7 @@
 @section('title', 'Aide - ArEM')
 
 @section('content')
-<div class="container px-5 py-5">
+<div class="container-fluid px-5 py-5">
     <div class="row">
         <div class="col-lg-3">
             <div class="card sticky-top" style="top: 100px;">
