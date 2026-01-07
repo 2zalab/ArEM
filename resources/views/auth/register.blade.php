@@ -1,5 +1,8 @@
 <x-guest-layout>
-    <h4 class="fw-bold mb-4">Créer un compte</h4>
+    <div class="auth-form-header">
+        <h2>Créer un compte</h2>
+        <p>Rejoignez ArEM pour déposer vos documents</p>
+    </div>
 
     <form method="POST" action="{{ route('register') }}">
         @csrf

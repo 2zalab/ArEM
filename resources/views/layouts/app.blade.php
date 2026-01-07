@@ -124,9 +124,9 @@
                         <!-- Notifications -->
                         <a href="{{ route('notifications.index') }}" class="btn btn-link position-relative">
                             <i class="bi bi-bell fs-5"></i>
-                            @if(auth()->user()->unreadNotifications->count() > 0)
+                            @if(auth()->user()->unreadNotificationsCount() > 0)
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    {{ auth()->user()->unreadNotifications->count() }}
+                                    {{ auth()->user()->unreadNotificationsCount() }}
                                 </span>
                             @endif
                         </a>
