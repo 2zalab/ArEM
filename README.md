@@ -1,59 +1,256 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# ArEM - Plateforme d'Archives de l'ENS de Maroua
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![Laravel](https://img.shields.io/badge/Laravel-12.x-red.svg)](https://laravel.com)
+[![PHP](https://img.shields.io/badge/PHP-8.2+-blue.svg)](https://www.php.net)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-## About Laravel
+**ArEM** (Archives de l'École Normale Supérieure de Maroua) est un dépôt institutionnel numérique conçu pour archiver, gérer et diffuser les productions académiques de l'ENS de Maroua. Inspiré de HAL mais adapté au contexte local, ArEM offre une solution simple, pédagogique et efficace.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🎯 Vision et Objectifs
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+ArEM n'est pas qu'un simple dépôt de fichiers PDF. C'est une **base de connaissance académique structurée, interopérable et durable** qui permet de :
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Déposer** : Soumettre des travaux académiques avec métadonnées complètes
+- **Valider** : Workflow de validation académique rigoureux
+- **Conserver** : Stockage sécurisé avec identifiants pérennes
+- **Diffuser** : Accès public ou contrôlé selon les droits définis
 
-## Learning Laravel
+## ✨ Fonctionnalités Principales
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 🔐 Gestion des Utilisateurs et Rôles
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Administrateur principal** : Gestion complète de la plateforme
+- **Modérateur scientifique** : Validation des documents soumis
+- **Déposant** : Soumission de documents (étudiants, enseignants, chercheurs)
+- **Lecteur** : Consultation publique ou restreinte
+- **Profils enrichis** : Photo, bio, identifiant ArEM unique
 
-## Laravel Sponsors
+### 📄 Types de Documents Supportés
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1. Mémoires de Licence et Master
+2. Thèses de Doctorat
+3. Articles scientifiques
+4. Rapports de stage
+5. Projets de fin d'étude
+6. Cours et supports pédagogiques
+7. Communications scientifiques
+8. Rapports institutionnels
+9. Documents administratifs académiques
+10. Données de recherche (datasets)
 
-### Premium Partners
+### 🔄 Workflow de Validation Académique
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+1. **Dépôt** par l'auteur avec métadonnées complètes
+2. **Vérification administrative** (complétude des informations)
+3. **Validation scientifique** par un modérateur qualifié
+4. **Publication** ou demande de corrections
+5. **Historique complet** avec commentaires et versions
 
-## Contributing
+### 🔍 Recherche et Navigation
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- **Recherche simple** : Mot-clé dans titre, résumé, mots-clés
+- **Recherche avancée** : Par auteur, année, type, département, langue
+- **Navigation structurée** : Par discipline, promotion, encadreur
+- **Suggestions automatiques** de documents similaires
 
-## Code of Conduct
+### 📊 Statistiques et Métriques
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Nombre de vues par document
+- Nombre de téléchargements
+- Statistiques par département
+- Documents les plus consultés
+- Tableaux de bord analytiques
 
-## Security Vulnerabilities
+### 🎨 Identité Visuelle
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- **Couleurs** : Bleu marine (principal), Bleu ciel (secondaire)
+- **Interface** : Sobre, académique, responsive
+- **Design** : Bootstrap 5, icônes Bootstrap Icons
 
-## License
+## 🏗️ Architecture Technique
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Stack Technologique
+
+- **Backend** : Laravel 12.x (PHP 8.2+)
+- **Frontend** : Blade templates + Bootstrap 5
+- **Base de données** : MySQL / PostgreSQL / SQLite
+- **Stockage** : Fichiers locaux sécurisés (possibilité cloud)
+- **API** : REST (préparation interopérabilité)
+
+### Structure de la Base de Données
+
+```
+users (utilisateurs avec rôles)
+├── departments (départements)
+├── document_types (types de documents)
+├── documents (documents avec métadonnées)
+│   ├── document_metadata (métadonnées spécifiques)
+│   ├── validation_workflows (historique de validation)
+│   ├── document_statistics (statistiques vues/téléchargements)
+│   └── notifications (notifications utilisateurs)
+```
+
+### Identifiants ArEM
+
+- **Utilisateur** : `AREM-AUTH-2026-000123`
+- **Document** : `AREM-DOC-ENS-2026-00456`
+- **URL persistante** : `https://arem.ens-maroua.cm/documents/AREM-DOC-ENS-2026-00456`
+
+## 🚀 Installation
+
+### Prérequis
+
+- PHP >= 8.2
+- Composer
+- MySQL / PostgreSQL ou SQLite
+- Node.js et NPM (pour les assets)
+
+### Étapes d'Installation
+
+```bash
+# Cloner le repository
+git clone https://github.com/2zalab/ArEM.git
+cd ArEM
+
+# Installer les dépendances PHP
+composer install
+
+# Copier et configurer l'environnement
+cp .env.example .env
+php artisan key:generate
+
+# Configurer la base de données dans .env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=arem_db
+DB_USERNAME=root
+DB_PASSWORD=
+
+# Exécuter les migrations
+php artisan migrate
+
+# (Optionnel) Peupler avec des données de test
+php artisan db:seed
+
+# Installer les dépendances frontend
+npm install
+npm run build
+
+# Lancer le serveur de développement
+php artisan serve
+```
+
+Accédez à l'application sur `http://localhost:8000`
+
+## 📁 Structure du Projet
+
+```
+ArEM/
+├── app/
+│   ├── Http/Controllers/
+│   │   ├── HomeController.php
+│   │   ├── DocumentController.php
+│   │   ├── ValidationController.php
+│   │   ├── SearchController.php
+│   │   ├── ProfileController.php
+│   │   ├── NotificationController.php
+│   │   └── Admin/AdminController.php
+│   └── Models/
+│       ├── User.php
+│       ├── Document.php
+│       ├── DocumentType.php
+│       ├── Department.php
+│       ├── DocumentMetadata.php
+│       ├── ValidationWorkflow.php
+│       ├── Notification.php
+│       └── DocumentStatistic.php
+├── database/migrations/
+│   ├── *_create_users_table.php
+│   ├── *_add_arem_fields_to_users_table.php
+│   ├── *_create_departments_table.php
+│   ├── *_create_document_types_table.php
+│   ├── *_create_documents_table.php
+│   ├── *_create_document_metadata_table.php
+│   ├── *_create_validation_workflows_table.php
+│   ├── *_create_notifications_table.php
+│   └── *_create_document_statistics_table.php
+├── resources/views/
+│   ├── layouts/app.blade.php
+│   ├── home.blade.php
+│   ├── documents/
+│   ├── search/
+│   ├── validation/
+│   ├── profile/
+│   └── admin/
+└── routes/web.php
+```
+
+## 🎓 Utilisation
+
+### Pour les Déposants
+
+1. **S'inscrire** et compléter son profil
+2. **Sélectionner le type** de document à déposer
+3. **Remplir le formulaire** avec métadonnées requises
+4. **Téléverser le fichier** PDF (max 20 Mo)
+5. **Soumettre** pour validation
+6. **Suivre le statut** via les notifications
+
+### Pour les Modérateurs
+
+1. Accéder à l'**espace de validation**
+2. **Consulter** les documents en attente
+3. **Examiner** les métadonnées et le contenu
+4. **Approuver**, **rejeter** ou **demander des révisions**
+5. **Ajouter des commentaires** justificatifs
+
+### Pour les Administrateurs
+
+1. **Tableau de bord** avec statistiques globales
+2. **Gestion des utilisateurs** et des rôles
+3. **Gestion des départements** et types de documents
+4. **Rapports** et exports
+5. **Configuration** de la plateforme
+
+## 🔮 Évolutions Futures
+
+- ✅ **Génération automatique de page de garde PDF**
+- ✅ **Interconnexion avec HAL**
+- ✅ **Export vers Google Scholar**
+- ✅ **DOI institutionnel**
+- ✅ **Export OAI-PMH**
+- ✅ **Recommandations par IA**
+- ✅ **Dépôt de vidéos pédagogiques**
+- ✅ **API REST publique**
+- ✅ **Multilingue (FR/EN)**
+
+## 🤝 Contribution
+
+Les contributions sont les bienvenues ! Pour contribuer :
+
+1. Forkez le projet
+2. Créez une branche (`git checkout -b feature/ma-fonctionnalite`)
+3. Committez vos changements (`git commit -m 'Ajout de ma fonctionnalité'`)
+4. Pushez vers la branche (`git push origin feature/ma-fonctionnalite`)
+5. Ouvrez une Pull Request
+
+## 📝 Licence
+
+Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+
+## 📧 Contact
+
+**École Normale Supérieure de Maroua**
+Email: contact@ens-maroua.cm
+Site web: https://ens-maroua.cm
+
+## 🙏 Remerciements
+
+- Inspiré par [HAL (Hyper Articles en Ligne)](https://hal.science)
+- Développé avec [Laravel](https://laravel.com)
+- Interface avec [Bootstrap](https://getbootstrap.com)
+
+---
+
+**ArEM** - Préserver et diffuser la connaissance académique de l'ENS de Maroua 🎓📚
