@@ -110,7 +110,6 @@
 <div class="hero-section">
     <div class="container-fluid px-5">
         <div class="text-center text-white mb-5">
-            <img src="{{ asset('images/logo.jpg') }}" alt="ArEM Logo" class="hero-logo">
             <h1 class="display-4 fw-bold mb-3">Explorez, partagez et valorisez</h1>
             <p class="lead mb-4">la production scientifique et académique de notre institution</p>
         </div>

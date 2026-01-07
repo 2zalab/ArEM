@@ -83,6 +83,11 @@
         .alert {
             border-radius: 8px;
         }
+
+        .nav-logo{
+            max-width: 80px;
+            margin-right: 2px;
+        }
     </style>
 
     @yield('styles')
@@ -92,7 +97,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
         <div class="container-fluid px-5">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <i class="bi bi-archive me-2"></i>ArEM
+                <img src="{{ asset('images/logo.jpg') }}" class="nav-logo"> ArEM
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
