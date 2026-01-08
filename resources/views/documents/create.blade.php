@@ -260,7 +260,7 @@
                 @csrf
 
                 <!-- Document Type Selection -->
-                <div class="card step-card mb-4">
+                <div class="card step-card mb-4" data-step-content="1">
                     <div class="card-header step-header">
                         <h5><span class="step-number">1</span>Type de document</h5>
                     </div>
@@ -294,7 +294,7 @@
                 </div>
 
                 <!-- General Information -->
-                <div class="card step-card mb-4">
+                <div class="card step-card mb-4" data-step-content="2" style="display: none;">
                     <div class="card-header step-header">
                         <h5><span class="step-number">2</span>Informations générales</h5>
                     </div>
@@ -441,7 +441,7 @@
                 </div>
 
                 <!-- Dynamic Metadata Fields -->
-                <div class="card step-card mb-4" id="metadataCard" style="display: none;">
+                <div class="card step-card mb-4" id="metadataCard" data-step-content="3" style="display: none;">
                     <div class="card-header step-header">
                         <h5><span class="step-number">3</span>Métadonnées spécifiques</h5>
                     </div>
@@ -451,7 +451,7 @@
                 </div>
 
                 <!-- File Upload -->
-                <div class="card step-card mb-4">
+                <div class="card step-card mb-4" data-step-content="4" style="display: none;">
                     <div class="card-header step-header">
                         <h5><span class="step-number">4</span>Fichier</h5>
                     </div>
@@ -477,7 +477,7 @@
                 </div>
 
                 <!-- Access Rights -->
-                <div class="card step-card mb-4">
+                <div class="card step-card mb-4" data-step-content="5" style="display: none;">
                     <div class="card-header step-header">
                         <h5><span class="step-number">5</span>Droits d'accès</h5>
                     </div>
@@ -543,12 +543,20 @@
                     </div>
                 </div>
 
-                <!-- Submit Buttons -->
-                <div class="d-flex gap-2 justify-content-end">
-                    <a href="{{ route('home') }}" class="btn btn-outline-secondary btn-lg">Annuler</a>
-                    <button type="submit" class="btn btn-primary btn-lg">
-                        <i class="bi bi-check-circle me-2"></i>Soumettre le document
+                <!-- Navigation Buttons -->
+                <div class="d-flex gap-2 justify-content-between">
+                    <button type="button" class="btn btn-outline-secondary btn-lg" id="prevBtn" onclick="changeStep(-1)" style="display: none;">
+                        <i class="bi bi-arrow-left me-2"></i>Précédent
                     </button>
+                    <div class="ms-auto d-flex gap-2">
+                        <a href="{{ route('home') }}" class="btn btn-outline-secondary btn-lg">Annuler</a>
+                        <button type="button" class="btn btn-primary btn-lg" id="nextBtn" onclick="changeStep(1)">
+                            Suivant<i class="bi bi-arrow-right ms-2"></i>
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-lg" id="submitBtn" style="display: none;">
+                            <i class="bi bi-check-circle me-2"></i>Soumettre le document
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -838,68 +846,162 @@ function removeAuthor(index) {
     }
 }
 
-// Progress tracking
-function updateProgress(stepNumber) {
-    const steps = document.querySelectorAll('.progress-step');
-    steps.forEach((step, index) => {
-        if (index < stepNumber) {
-            step.classList.add('active');
-        }
-    });
-}
+// Step navigation
+let currentStep = 1;
+const totalSteps = 5;
 
-// Track form interactions to update progress
-function setupProgressTracking() {
-    // Step 1: Type de document
-    document.getElementById('document_type_id')?.addEventListener('change', function() {
-        if (this.value) {
-            updateProgress(1);
-        }
+function showStep(stepNumber) {
+    // Hide all step contents
+    document.querySelectorAll('[data-step-content]').forEach(function(el) {
+        el.style.display = 'none';
     });
 
-    // Step 2: Informations générales
-    document.getElementById('title')?.addEventListener('input', function() {
-        if (this.value) {
-            updateProgress(2);
-        }
-    });
-
-    // Step 3: Métadonnées (auto-update when metadata card is visible)
-    const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            if (mutation.target.id === 'metadataCard') {
-                if (mutation.target.style.display !== 'none') {
-                    updateProgress(3);
-                }
-            }
-        });
-    });
-
-    const metadataCard = document.getElementById('metadataCard');
-    if (metadataCard) {
-        observer.observe(metadataCard, { attributes: true, attributeFilter: ['style'] });
+    // Show current step content
+    const currentStepEl = document.querySelector(`[data-step-content="${stepNumber}"]`);
+    if (currentStepEl) {
+        currentStepEl.style.display = 'block';
     }
 
-    // Step 4: Fichier
-    document.getElementById('file')?.addEventListener('change', function() {
-        if (this.files.length > 0) {
-            updateProgress(4);
+    // Update progress indicator
+    document.querySelectorAll('.progress-step').forEach(function(step, index) {
+        if (index < stepNumber) {
+            step.classList.add('active');
+        } else {
+            step.classList.remove('active');
         }
     });
 
-    // Step 5: Droits d'accès
-    document.querySelectorAll('input[name="access_rights"]').forEach(function(radio) {
-        radio.addEventListener('change', function() {
-            updateProgress(5);
-        });
+    // Update buttons visibility
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const submitBtn = document.getElementById('submitBtn');
+
+    if (stepNumber === 1) {
+        prevBtn.style.display = 'none';
+    } else {
+        prevBtn.style.display = 'block';
+    }
+
+    // Handle step 3 (metadata) - skip if no metadata required
+    if (stepNumber === 3) {
+        const metadataCard = document.getElementById('metadataCard');
+        const hasMetadata = metadataCard && metadataCard.querySelector('#metadataFields').innerHTML.trim() !== '';
+
+        if (!hasMetadata) {
+            // Skip step 3 if no metadata
+            if (currentStep < 3) {
+                currentStep = 4;
+                showStep(4);
+                return;
+            } else {
+                currentStep = 2;
+                showStep(2);
+                return;
+            }
+        }
+    }
+
+    if (stepNumber === totalSteps) {
+        nextBtn.style.display = 'none';
+        submitBtn.style.display = 'block';
+    } else {
+        nextBtn.style.display = 'block';
+        submitBtn.style.display = 'none';
+    }
+
+    currentStep = stepNumber;
+}
+
+function changeStep(direction) {
+    let nextStep = currentStep + direction;
+
+    // Skip step 3 if no metadata required
+    if (nextStep === 3) {
+        const metadataCard = document.getElementById('metadataCard');
+        const hasMetadata = metadataCard && metadataCard.querySelector('#metadataFields').innerHTML.trim() !== '';
+
+        if (!hasMetadata) {
+            nextStep = direction > 0 ? 4 : 2;
+        }
+    }
+
+    // Validate before moving forward
+    if (direction > 0 && !validateStep(currentStep)) {
+        return;
+    }
+
+    if (nextStep >= 1 && nextStep <= totalSteps) {
+        showStep(nextStep);
+    }
+}
+
+function validateStep(stepNumber) {
+    let isValid = true;
+    const currentStepEl = document.querySelector(`[data-step-content="${stepNumber}"]`);
+
+    if (!currentStepEl) return true;
+
+    // Get all required fields in current step
+    const requiredFields = currentStepEl.querySelectorAll('[required]');
+
+    requiredFields.forEach(function(field) {
+        if (!field.value || field.value === '') {
+            isValid = false;
+            field.classList.add('is-invalid');
+
+            // Add error message if not exists
+            if (!field.nextElementSibling || !field.nextElementSibling.classList.contains('invalid-feedback')) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'invalid-feedback d-block';
+                errorDiv.textContent = 'Ce champ est obligatoire';
+                field.parentNode.insertBefore(errorDiv, field.nextSibling);
+            }
+        } else {
+            field.classList.remove('is-invalid');
+            // Remove error message
+            const errorDiv = field.nextElementSibling;
+            if (errorDiv && errorDiv.classList.contains('invalid-feedback')) {
+                errorDiv.remove();
+            }
+        }
     });
+
+    // Special validation for step 2 (authors)
+    if (stepNumber === 2) {
+        const authorsContainer = document.getElementById('authors-container');
+        if (authorsContainer && authorsContainer.children.length === 0) {
+            isValid = false;
+            alert('Veuillez ajouter au moins un auteur');
+        }
+
+        // Keywords validation
+        if (keywordsArray.length === 0) {
+            isValid = false;
+            const keywordsInput = document.getElementById('keywords_input');
+            keywordsInput.classList.add('is-invalid');
+            if (!document.querySelector('#keywords_input + .invalid-feedback')) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'invalid-feedback d-block';
+                errorDiv.textContent = 'Veuillez ajouter au moins un mot-clé';
+                keywordsInput.parentNode.insertBefore(errorDiv, keywordsInput.nextSibling);
+            }
+        }
+    }
+
+    if (!isValid) {
+        alert('Veuillez remplir tous les champs obligatoires avant de continuer');
+    }
+
+    return isValid;
 }
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
     updateRequiredFields();
     toggleEmbargoDate();
-    setupProgressTracking();
+
+    // Show first step
+    showStep(1);
 
     // Load existing keywords from old() values (Laravel validation)
     @if(old('keywords'))
