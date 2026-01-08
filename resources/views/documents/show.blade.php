@@ -58,6 +58,67 @@
                 </div>
             @endif
 
+            <!-- PDF Preview -->
+            @if($document->isAccessible())
+                <div class="card mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0"><i class="bi bi-file-pdf me-2"></i>Aperçu du document</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="ratio ratio-16x9" style="min-height: 600px;">
+                            <iframe src="{{ asset('storage/' . $document->file_path) }}"
+                                    type="application/pdf"
+                                    style="border: none;">
+                            </iframe>
+                        </div>
+                        <div class="p-3 bg-light text-center">
+                            <small class="text-muted">
+                                <i class="bi bi-info-circle me-1"></i>
+                                Si l'aperçu ne s'affiche pas correctement,
+                                <a href="{{ route('documents.download', $document->arem_doc_id) }}">téléchargez le PDF</a>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+            <!-- Authors & Citation -->
+            @if($document->authors && count($document->authors) > 0)
+                <div class="card mb-4">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-3">Auteurs</h5>
+                        <div class="row g-3 mb-4">
+                            @foreach($document->authors as $author)
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-start">
+                                        <i class="bi bi-person-circle fs-4 text-primary me-2"></i>
+                                        <div>
+                                            <strong>{{ $author['name'] }}</strong>
+                                            @if(isset($author['institution']) && $author['institution'])
+                                                <br><small class="text-muted">{{ $author['institution'] }}</small>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        @if($document->citation)
+                            <div class="border-top pt-3">
+                                <h6 class="fw-bold mb-2">Citation</h6>
+                                <div class="bg-light p-3 rounded">
+                                    <small class="text-muted">{!! $document->citation !!}</small>
+                                </div>
+                                <button class="btn btn-sm btn-outline-secondary mt-2"
+                                        onclick="navigator.clipboard.writeText('{{ strip_tags($document->citation) }}')">
+                                    <i class="bi bi-clipboard me-1"></i>Copier la citation
+                                </button>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            @endif
+
             <!-- Actions -->
             <div class="card">
                 <div class="card-body p-4">
@@ -69,9 +130,11 @@
                         <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#shareModal">
                             <i class="bi bi-share me-2"></i>Partager
                         </button>
-                        <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#citeModal">
-                            <i class="bi bi-quote me-2"></i>Citer
-                        </button>
+                        @if($document->citation)
+                            <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#citeModal">
+                                <i class="bi bi-quote me-2"></i>Citer
+                            </button>
+                        @endif
                     </div>
                 </div>
             </div>

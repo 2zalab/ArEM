@@ -49,6 +49,9 @@ class DocumentController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'abstract' => 'required|string',
+            'authors' => 'required|array|min:1',
+            'authors.*.name' => 'required|string|max:255',
+            'authors.*.institution' => 'nullable|string|max:255',
             'keywords' => 'required|array|min:1',
             'language' => 'required|string',
             'year' => 'required|integer',
@@ -62,11 +65,17 @@ class DocumentController extends Controller
         $fileName = time() . '_' . $file->getClientOriginalName();
         $filePath = $file->storeAs('documents', $fileName, 'private');
 
+        // Préparer les données des auteurs
+        $authors = array_values(array_filter($request->authors, function($author) {
+            return !empty($author['name']);
+        }));
+
         $document = Document::create([
             'user_id' => Auth::id(),
             'department_id' => $request->department_id ?? Auth::user()->department_id,
             'document_type_id' => $request->document_type_id,
             'title' => $request->title,
+            'authors' => $authors,
             'abstract' => $request->abstract,
             'keywords' => $request->keywords,
             'language' => $request->language,
@@ -139,13 +148,24 @@ class DocumentController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'abstract' => 'required|string',
+            'authors' => 'nullable|array',
+            'authors.*.name' => 'required_with:authors|string|max:255',
+            'authors.*.institution' => 'nullable|string|max:255',
             'keywords' => 'required|array|min:1',
             'language' => 'required|string',
             'year' => 'required|integer',
             'file' => 'nullable|file|mimes:pdf|max:20480',
         ]);
 
-        $document->update([
+        // Préparer les données des auteurs
+        $authors = null;
+        if ($request->has('authors')) {
+            $authors = array_values(array_filter($request->authors, function($author) {
+                return !empty($author['name']);
+            }));
+        }
+
+        $updateData = [
             'title' => $request->title,
             'abstract' => $request->abstract,
             'keywords' => $request->keywords,
@@ -154,7 +174,13 @@ class DocumentController extends Controller
             'academic_year' => $request->academic_year,
             'access_rights' => $request->access_rights,
             'embargo_date' => $request->embargo_date,
-        ]);
+        ];
+
+        if ($authors) {
+            $updateData['authors'] = $authors;
+        }
+
+        $document->update($updateData);
 
         if ($request->hasFile('file')) {
             Storage::disk('private')->delete($document->file_path);
