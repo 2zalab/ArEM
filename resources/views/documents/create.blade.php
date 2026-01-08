@@ -74,6 +74,24 @@
                             @enderror
                         </div>
 
+                        <!-- Auteurs -->
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Auteurs *</label>
+                            <div class="form-text mb-2">Ajoutez les auteurs du document avec leurs institutions</div>
+
+                            <div id="authors-container">
+                                <!-- Les auteurs seront ajoutés ici -->
+                            </div>
+
+                            <button type="button" class="btn btn-outline-primary btn-sm mt-2" onclick="addAuthor()">
+                                <i class="bi bi-plus-circle me-1"></i>Ajouter un auteur
+                            </button>
+
+                            @error('authors')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         <div class="mb-3">
                             <label for="abstract" class="form-label fw-bold">Résumé *</label>
                             <textarea
@@ -527,6 +545,59 @@ document.getElementById('keywords_input').addEventListener('input', function(e) 
     }
 });
 
+// Authors management
+let authorsArray = [];
+let authorIndex = 0;
+
+function addAuthor() {
+    const container = document.getElementById('authors-container');
+    const index = authorIndex++;
+
+    const authorHtml = `
+        <div class="card mb-2" id="author-${index}">
+            <div class="card-body py-2">
+                <div class="row align-items-center">
+                    <div class="col-md-5">
+                        <input type="text"
+                               class="form-control form-control-sm"
+                               name="authors[${index}][name]"
+                               placeholder="Nom complet de l'auteur"
+                               required>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text"
+                               class="form-control form-control-sm"
+                               name="authors[${index}][institution]"
+                               placeholder="Institution / Affiliation">
+                    </div>
+                    <div class="col-md-1 text-end">
+                        <button type="button"
+                                class="btn btn-sm btn-outline-danger"
+                                onclick="removeAuthor(${index})"
+                                title="Retirer cet auteur">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    container.insertAdjacentHTML('beforeend', authorHtml);
+    authorsArray.push(index);
+}
+
+function removeAuthor(index) {
+    const element = document.getElementById(`author-${index}`);
+    if (element) {
+        element.remove();
+    }
+    const arrayIndex = authorsArray.indexOf(index);
+    if (arrayIndex > -1) {
+        authorsArray.splice(arrayIndex, 1);
+    }
+}
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
     updateRequiredFields();
@@ -536,6 +607,25 @@ document.addEventListener('DOMContentLoaded', function() {
     @if(old('keywords'))
         keywordsArray = @json(old('keywords'));
         renderKeywordBadges();
+    @endif
+
+    // Add first author by default
+    addAuthor();
+
+    // Load existing authors from old() values (Laravel validation)
+    @if(old('authors'))
+        const oldAuthors = @json(old('authors'));
+        // Clear the default author first
+        document.getElementById('authors-container').innerHTML = '';
+        authorsArray = [];
+        authorIndex = 0;
+
+        // Re-add all old authors
+        oldAuthors.forEach((author, idx) => {
+            addAuthor();
+            document.querySelector(`input[name="authors[${idx}][name]"]`).value = author.name || '';
+            document.querySelector(`input[name="authors[${idx}][institution]"]`).value = author.institution || '';
+        });
     @endif
 });
 </script>
