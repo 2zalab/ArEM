@@ -24,8 +24,14 @@ class SearchController extends Controller
         }
 
         if ($request->has('author') && $request->author) {
-            $query->whereHas('user', function ($q) use ($request) {
-                $q->where('name', 'like', "%{$request->author}%");
+            $authorName = $request->author;
+            $query->where(function ($q) use ($authorName) {
+                // Recherche dans l'utilisateur qui a déposé
+                $q->whereHas('user', function ($userQuery) use ($authorName) {
+                    $userQuery->where('name', 'like', "%{$authorName}%");
+                })
+                // OU recherche dans le champ JSON authors (conversion en texte pour LIKE)
+                ->orWhereRaw("LOWER(JSON_EXTRACT(authors, '$[*].name')) LIKE ?", ['%' . strtolower($authorName) . '%']);
             });
         }
 
