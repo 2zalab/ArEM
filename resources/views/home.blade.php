@@ -261,4 +261,44 @@
         </div>
     </div>
 </div>
+
+<!-- Partners Section -->
+<div class="container-fluid px-5 py-5 mt-5" style="background: linear-gradient(to bottom, #f8f9fa, #ffffff);">
+    <div class="text-center mb-5">
+        <h3 class="fw-bold" style="color: var(--primary-color);">Nos Partenaires</h3>
+        <p class="text-muted">En collaboration avec</p>
+    </div>
+    <div class="row justify-content-center align-items-center g-5">
+        <div class="col-lg-3 col-md-4 col-sm-6 text-center">
+            <div class="partner-logo-container p-4">
+                <img src="{{ asset('images/minesup.png') }}"
+                     alt="MINESUP"
+                     class="img-fluid partner-logo"
+                     style="max-height: 120px; filter: grayscale(100%); transition: all 0.3s;"
+                     onmouseover="this.style.filter='grayscale(0%)'"
+                     onmouseout="this.style.filter='grayscale(100%)'">
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 text-center">
+            <div class="partner-logo-container p-4">
+                <img src="{{ asset('images/univ-maroua.png') }}"
+                     alt="Université de Maroua"
+                     class="img-fluid partner-logo"
+                     style="max-height: 120px; filter: grayscale(100%); transition: all 0.3s;"
+                     onmouseover="this.style.filter='grayscale(0%)'"
+                     onmouseout="this.style.filter='grayscale(100%)'">
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 text-center">
+            <div class="partner-logo-container p-4">
+                <img src="{{ asset('images/ens.png') }}"
+                     alt="ENS Maroua"
+                     class="img-fluid partner-logo"
+                     style="max-height: 120px; filter: grayscale(100%); transition: all 0.3s;"
+                     onmouseover="this.style.filter='grayscale(0%)'"
+                     onmouseout="this.style.filter='grayscale(100%)'">
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

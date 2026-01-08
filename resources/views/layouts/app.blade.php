@@ -37,11 +37,18 @@
 
         .nav-link {
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            position: relative;
+            padding-bottom: 0.5rem !important;
         }
 
         .nav-link:hover {
             color: var(--secondary-color) !important;
+        }
+
+        .nav-link.active {
+            color: var(--secondary-color) !important;
+            border-bottom: 3px solid var(--secondary-color);
         }
 
         .btn-primary {
@@ -102,19 +109,19 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">Accueil</a>
+                        <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('documents.index') }}">Documents</a>
+                        <a class="nav-link {{ request()->routeIs('documents.*') ? 'active' : '' }}" href="{{ route('documents.index') }}">Documents</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('search.advanced') }}">Recherche avancée</a>
+                        <a class="nav-link {{ request()->routeIs('search.*') ? 'active' : '' }}" href="{{ route('search.advanced') }}">Recherche avancée</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('about') }}">À propos</a>
+                        <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">À propos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('help') }}">Aide</a>
+                        <a class="nav-link {{ request()->routeIs('help') ? 'active' : '' }}" href="{{ route('help') }}">Aide</a>
                     </li>
                 </ul>
 

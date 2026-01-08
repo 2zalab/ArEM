@@ -24,6 +24,7 @@ Route::get('/documents', [DocumentController::class, 'index'])->name('documents.
 Route::get('/documents/browse', [DocumentController::class, 'browse'])->name('documents.browse');
 Route::get('/documents/create', [DocumentController::class, 'create'])->middleware(['auth', 'verified'])->name('documents.create');
 Route::post('/documents', [DocumentController::class, 'store'])->middleware(['auth', 'verified'])->name('documents.store');
+Route::get('/documents/{aremDocId}/preview', [DocumentController::class, 'preview'])->name('documents.preview');
 Route::get('/documents/{aremDocId}/download', [DocumentController::class, 'download'])->name('documents.download');
 Route::get('/documents/{aremDocId}/edit', [DocumentController::class, 'edit'])->middleware(['auth', 'verified'])->name('documents.edit');
 Route::patch('/documents/{aremDocId}', [DocumentController::class, 'update'])->middleware(['auth', 'verified'])->name('documents.update');

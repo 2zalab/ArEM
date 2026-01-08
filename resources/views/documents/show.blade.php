@@ -66,7 +66,7 @@
                     </div>
                     <div class="card-body p-0">
                         <div class="ratio ratio-16x9" style="min-height: 600px;">
-                            <iframe src="{{ asset('storage/' . $document->file_path) }}"
+                            <iframe src="{{ route('documents.preview', $document->arem_doc_id) }}"
                                     type="application/pdf"
                                     style="border: none;">
                             </iframe>
