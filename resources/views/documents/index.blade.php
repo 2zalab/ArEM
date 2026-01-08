@@ -19,6 +19,95 @@
         border-color: transparent;
     }
 
+    /* List View Styles */
+    .document-list-card {
+        border: 1px solid #dee2e6;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.2s, box-shadow 0.2s;
+        margin-bottom: 1rem;
+    }
+
+    .document-list-card:hover {
+        transform: translateX(4px);
+        box-shadow: 0 4px 12px rgba(0, 64, 160, 0.15);
+    }
+
+    .document-list-header {
+        background: linear-gradient(135deg, rgba(0, 64, 160, 0.05) 0%, rgba(90, 200, 250, 0.05) 100%);
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid #dee2e6;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .document-list-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #0040A0;
+        margin: 0;
+    }
+
+    .document-list-title a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .document-list-title a:hover {
+        color: #5AC8FA;
+    }
+
+    .document-list-body {
+        padding: 1.5rem;
+    }
+
+    .document-list-abstract {
+        color: #6c757d;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    .document-list-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        color: #6c757d;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .document-list-meta span {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .document-list-meta i {
+        color: #0040A0;
+    }
+
+    .document-list-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 1rem;
+        border-top: 1px solid #e9ecef;
+    }
+
+    .document-list-stats {
+        display: flex;
+        gap: 1.5rem;
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+
+    .document-list-stats span {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
     /* Grid View Styles */
     .documents-grid {
         display: grid;
@@ -121,6 +210,16 @@
         padding: 0 1rem 1rem 1rem;
     }
 
+    /* Badge Styling */
+    .badge-document-type {
+        background: linear-gradient(135deg, #0040A0 0%, #5AC8FA 100%);
+        color: white;
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-weight: 500;
+        font-size: 0.85rem;
+    }
+
     /* Hide/Show views */
     .list-view {
         display: block;
@@ -212,40 +311,34 @@
     <!-- Documents List View -->
     <div class="list-view active" id="listView">
         @forelse($documents as $document)
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <h5 class="card-title mb-2">
-                                <a href="{{ route('documents.show', $document->arem_doc_id) }}" class="text-decoration-none text-dark">
-                                    {{ $document->title }}
-                                </a>
-                            </h5>
-                            <p class="card-text text-muted mb-3">
-                                {{ Str::limit($document->abstract, 250) }}
-                            </p>
-                            <div class="d-flex flex-wrap gap-3 small text-muted">
-                                <span><i class="bi bi-person me-1"></i>{{ $document->user->name }}</span>
-                                <span><i class="bi bi-calendar me-1"></i>{{ $document->year }}</span>
-                                <span><i class="bi bi-tag me-1"></i>{{ $document->documentType->name }}</span>
-                                @if($document->department)
-                                    <span><i class="bi bi-building me-1"></i>{{ $document->department->name }}</span>
-                                @endif
-                            </div>
+            <div class="document-list-card">
+                <div class="document-list-header">
+                    <h5 class="document-list-title">
+                        <a href="{{ route('documents.show', $document->arem_doc_id) }}">
+                            {{ $document->title }}
+                        </a>
+                    </h5>
+                    <span class="badge-document-type">{{ $document->documentType->name }}</span>
+                </div>
+                <div class="document-list-body">
+                    <p class="document-list-abstract">
+                        {{ Str::limit($document->abstract, 300) }}
+                    </p>
+                    <div class="document-list-meta">
+                        <span><i class="bi bi-person"></i>{{ $document->user->name }}</span>
+                        <span><i class="bi bi-calendar"></i>{{ $document->year }}</span>
+                        @if($document->department)
+                            <span><i class="bi bi-building"></i>{{ $document->department->name }}</span>
+                        @endif
+                    </div>
+                    <div class="document-list-footer">
+                        <div class="document-list-stats">
+                            <span><i class="bi bi-eye"></i>{{ $document->getTotalViews() }} vues</span>
+                            <span><i class="bi bi-download"></i>{{ $document->getTotalDownloads() }} téléchargements</span>
                         </div>
-                        <div class="col-md-3 text-end">
-                            <div class="mb-3">
-                                <small class="text-muted d-block">
-                                    <i class="bi bi-eye me-1"></i>{{ $document->getTotalViews() }} vues
-                                </small>
-                                <small class="text-muted d-block">
-                                    <i class="bi bi-download me-1"></i>{{ $document->getTotalDownloads() }} téléchargements
-                                </small>
-                            </div>
-                            <a href="{{ route('documents.show', $document->arem_doc_id) }}" class="btn btn-outline-primary btn-sm">
-                                Voir détails
-                            </a>
-                        </div>
+                        <a href="{{ route('documents.show', $document->arem_doc_id) }}" class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-eye me-1"></i>Voir détails
+                        </a>
                     </div>
                 </div>
             </div>
