@@ -2,17 +2,186 @@
 
 @section('title', 'Déposer un document - ArEM')
 
+@section('styles')
+<style>
+    .step-card {
+        border: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: box-shadow 0.3s ease;
+    }
+
+    .step-card:hover {
+        box-shadow: 0 4px 16px rgba(0, 64, 160, 0.15);
+    }
+
+    .step-header {
+        background: linear-gradient(135deg, #0040A0 0%, #5AC8FA 100%);
+        color: white;
+        padding: 1.25rem 1.5rem;
+        border: none;
+    }
+
+    .step-header h5 {
+        margin: 0;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+    }
+
+    .step-number {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        margin-right: 12px;
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+
+    .step-card .card-body {
+        padding: 2rem 1.5rem;
+    }
+
+    .form-label.fw-bold {
+        color: #0040A0;
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #5AC8FA;
+        box-shadow: 0 0 0 0.25rem rgba(90, 200, 250, 0.25);
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #0040A0 0%, #5AC8FA 100%);
+        border: none;
+        font-weight: 600;
+        padding: 0.75rem 1.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #5AC8FA 0%, #0040A0 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 64, 160, 0.3);
+    }
+
+    .btn-outline-primary {
+        color: #0040A0;
+        border-color: #0040A0;
+        border-width: 2px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #0040A0;
+        border-color: #0040A0;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .btn-outline-secondary {
+        border-width: 2px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-secondary:hover {
+        transform: translateY(-2px);
+    }
+
+    .author-card {
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        transition: border-color 0.3s ease;
+    }
+
+    .author-card:hover {
+        border-color: #5AC8FA;
+    }
+
+    .keyword-badge {
+        background: linear-gradient(135deg, #0040A0 0%, #5AC8FA 100%);
+        color: white;
+        font-size: 0.9rem;
+        padding: 0.5rem 0.75rem;
+        border-radius: 20px;
+        display: inline-flex;
+        align-items: center;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .keyword-badge i {
+        margin-left: 0.5rem;
+        cursor: pointer;
+        opacity: 0.8;
+        transition: opacity 0.2s;
+    }
+
+    .keyword-badge i:hover {
+        opacity: 1;
+    }
+
+    .form-check-input:checked {
+        background-color: #0040A0;
+        border-color: #0040A0;
+    }
+
+    .form-check-input:focus {
+        border-color: #5AC8FA;
+        box-shadow: 0 0 0 0.25rem rgba(90, 200, 250, 0.25);
+    }
+
+    .page-header {
+        background: linear-gradient(135deg, rgba(0, 64, 160, 0.05) 0%, rgba(90, 200, 250, 0.05) 100%);
+        padding: 2rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+    }
+
+    .page-header h1 {
+        color: #0040A0;
+    }
+
+    .alert-info {
+        background-color: rgba(90, 200, 250, 0.1);
+        border-color: #5AC8FA;
+        color: #0040A0;
+    }
+
+    .file-info-alert {
+        background: linear-gradient(135deg, rgba(0, 64, 160, 0.05) 0%, rgba(90, 200, 250, 0.05) 100%);
+        border: 2px solid #5AC8FA;
+        border-radius: 8px;
+        padding: 1rem;
+        color: #0040A0;
+        font-weight: 500;
+    }
+</style>
+@endsection
+
 @section('content')
 <div class="container-fluid px-5 py-5">
     <div class="row justify-content-center">
         <div class="col-lg-10">
-            <div class="d-flex align-items-center mb-4">
-                <a href="{{ route('home') }}" class="btn btn-outline-secondary me-3">
-                    <i class="bi bi-arrow-left"></i>
-                </a>
-                <div>
-                    <h1 class="fw-bold mb-0">Déposer un document</h1>
-                    <p class="text-muted mb-0">Ajoutez un nouveau document aux archives</p>
+            <div class="page-header">
+                <div class="d-flex align-items-center">
+                    <a href="{{ route('home') }}" class="btn btn-outline-secondary me-3">
+                        <i class="bi bi-arrow-left"></i>
+                    </a>
+                    <div>
+                        <h1 class="fw-bold mb-0">Déposer un document</h1>
+                        <p class="text-muted mb-0">Ajoutez un nouveau document aux archives</p>
+                    </div>
                 </div>
             </div>
 
@@ -20,9 +189,9 @@
                 @csrf
 
                 <!-- Document Type Selection -->
-                <div class="card mb-4">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0"><i class="bi bi-1-circle me-2"></i>Type de document</h5>
+                <div class="card step-card mb-4">
+                    <div class="card-header step-header">
+                        <h5><span class="step-number">1</span>Type de document</h5>
                     </div>
                     <div class="card-body">
                         <div class="mb-3">
@@ -54,9 +223,9 @@
                 </div>
 
                 <!-- General Information -->
-                <div class="card mb-4">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0"><i class="bi bi-2-circle me-2"></i>Informations générales</h5>
+                <div class="card step-card mb-4">
+                    <div class="card-header step-header">
+                        <h5><span class="step-number">2</span>Informations générales</h5>
                     </div>
                     <div class="card-body">
                         <div class="mb-3">
@@ -201,9 +370,9 @@
                 </div>
 
                 <!-- Dynamic Metadata Fields -->
-                <div class="card mb-4" id="metadataCard" style="display: none;">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0"><i class="bi bi-3-circle me-2"></i>Métadonnées spécifiques</h5>
+                <div class="card step-card mb-4" id="metadataCard" style="display: none;">
+                    <div class="card-header step-header">
+                        <h5><span class="step-number">3</span>Métadonnées spécifiques</h5>
                     </div>
                     <div class="card-body" id="metadataFields">
                         <!-- Dynamic fields will be inserted here -->
@@ -211,9 +380,9 @@
                 </div>
 
                 <!-- File Upload -->
-                <div class="card mb-4">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0"><i class="bi bi-4-circle me-2"></i>Fichier</h5>
+                <div class="card step-card mb-4">
+                    <div class="card-header step-header">
+                        <h5><span class="step-number">4</span>Fichier</h5>
                     </div>
                     <div class="card-body">
                         <div class="mb-3">
@@ -237,9 +406,9 @@
                 </div>
 
                 <!-- Access Rights -->
-                <div class="card mb-4">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0"><i class="bi bi-5-circle me-2"></i>Droits d'accès</h5>
+                <div class="card step-card mb-4">
+                    <div class="card-header step-header">
+                        <h5><span class="step-number">5</span>Droits d'accès</h5>
                     </div>
                     <div class="card-body">
                         <div class="mb-3">
@@ -473,7 +642,7 @@ function displayFileInfo() {
         const file = fileInput.files[0];
         const sizeMB = (file.size / 1024 / 1024).toFixed(2);
         fileInfo.innerHTML = `
-            <div class="alert alert-info">
+            <div class="file-info-alert">
                 <i class="bi bi-file-pdf me-2"></i>
                 <strong>${file.name}</strong> (${sizeMB} Mo)
             </div>
@@ -490,9 +659,9 @@ function renderKeywordBadges() {
 
     // Render badges
     badgesContainer.innerHTML = keywordsArray.map((keyword, index) => `
-        <span class="badge bg-secondary me-2 mb-2" style="font-size: 0.95rem; padding: 0.5rem 0.75rem;">
+        <span class="keyword-badge">
             ${keyword}
-            <i class="bi bi-x-circle ms-1" style="cursor: pointer;" onclick="removeKeyword(${index})"></i>
+            <i class="bi bi-x-circle" onclick="removeKeyword(${index})"></i>
         </span>
     `).join('');
 
@@ -554,7 +723,7 @@ function addAuthor() {
     const index = authorIndex++;
 
     const authorHtml = `
-        <div class="card mb-2" id="author-${index}">
+        <div class="card author-card mb-2" id="author-${index}">
             <div class="card-body py-2">
                 <div class="row align-items-center">
                     <div class="col-md-5">
