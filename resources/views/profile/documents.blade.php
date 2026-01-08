@@ -10,9 +10,16 @@
             <div class="card border-0 shadow-sm">
                 <div class="card-body">
                     <div class="text-center mb-4">
-                        <div class="rounded-circle bg-primary bg-opacity-10 d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
-                            <i class="bi bi-person fs-1 text-primary"></i>
-                        </div>
+                        @if(Auth::user()->profile_photo)
+                            <img src="{{ asset('storage/' . Auth::user()->profile_photo) }}"
+                                 alt="{{ Auth::user()->name }}"
+                                 class="rounded-circle"
+                                 style="width: 80px; height: 80px; object-fit: cover;">
+                        @else
+                            <div class="rounded-circle bg-primary bg-opacity-10 d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                                <i class="bi bi-person fs-1 text-primary"></i>
+                            </div>
+                        @endif
                         <h5 class="fw-bold mt-3 mb-1">{{ Auth::user()->name }}</h5>
                         <p class="text-muted small mb-0">{{ Auth::user()->email }}</p>
                         @if(Auth::user()->department)
@@ -34,6 +41,9 @@
                     <nav class="nav flex-column">
                         <a href="{{ route('profile.documents') }}" class="nav-link active">
                             <i class="bi bi-files me-2"></i>Mes documents
+                        </a>
+                        <a href="{{ route('profile.cv') }}" class="nav-link">
+                            <i class="bi bi-file-person me-2"></i>Mon CV
                         </a>
                         <a href="{{ route('profile.edit') }}" class="nav-link">
                             <i class="bi bi-person-gear me-2"></i>Modifier le profil

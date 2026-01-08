@@ -36,6 +36,21 @@ class User extends Authenticatable
         'bio',
         'research_interests',
         'is_active',
+        // CV fields
+        'birth_date',
+        'birth_place',
+        'nationality',
+        'address',
+        'linkedin',
+        'orcid',
+        'google_scholar',
+        'education',
+        'experience',
+        'skills',
+        'languages',
+        'publications',
+        'certifications',
+        'references',
     ];
 
     /**
@@ -59,6 +74,14 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'is_active' => 'boolean',
+            'birth_date' => 'date',
+            'education' => 'array',
+            'experience' => 'array',
+            'skills' => 'array',
+            'languages' => 'array',
+            'publications' => 'array',
+            'certifications' => 'array',
+            'references' => 'array',
         ];
     }
 
