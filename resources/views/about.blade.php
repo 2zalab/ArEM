@@ -2,211 +2,84 @@
 
 @section('title', 'À propos - ArEM')
 
-@section('styles')
-<style>
-    .about-hero {
-        background: linear-gradient(135deg, #0040A0 0%, #5AC8FA 100%);
-        padding: 80px 0;
-        margin-bottom: 50px;
-    }
-
-    .mission-card {
-        background: linear-gradient(135deg, rgba(0, 64, 160, 0.05) 0%, rgba(90, 200, 250, 0.05) 100%);
-        border: none;
-        border-radius: 20px;
-        padding: 40px;
-        margin-bottom: 40px;
-        border-left: 5px solid #5AC8FA;
-    }
-
-    .feature-card {
-        border: none;
-        border-radius: 15px;
-        padding: 30px;
-        height: 100%;
-        background: white;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s;
-        border-top: 4px solid #5AC8FA;
-    }
-
-    .feature-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-    }
-
-    .feature-icon {
-        width: 70px;
-        height: 70px;
-        background: linear-gradient(135deg, #0040A0 0%, #5AC8FA 100%);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 2rem;
-        margin-bottom: 20px;
-    }
-
-    .value-item {
-        display: flex;
-        align-items: start;
-        margin-bottom: 20px;
-        padding: 20px;
-        background: #f8f9fa;
-        border-radius: 15px;
-        transition: all 0.3s;
-    }
-
-    .value-item:hover {
-        background: linear-gradient(135deg, rgba(0, 64, 160, 0.05) 0%, rgba(90, 200, 250, 0.05) 100%);
-        transform: translateX(10px);
-    }
-
-    .value-icon {
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, #0040A0 0%, #5AC8FA 100%);
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 1.5rem;
-        margin-right: 20px;
-        flex-shrink: 0;
-    }
-
-    .stats-section {
-        background: linear-gradient(135deg, #0040A0 0%, #5AC8FA 100%);
-        padding: 60px 0;
-        margin: 60px 0;
-        border-radius: 30px;
-        color: white;
-    }
-
-    .stat-item {
-        text-align: center;
-        padding: 20px;
-    }
-
-    .stat-number {
-        font-size: 3rem;
-        font-weight: 700;
-        margin-bottom: 10px;
-    }
-
-    .stat-label {
-        font-size: 1.1rem;
-        opacity: 0.9;
-    }
-</style>
-@endsection
-
 @section('content')
-<!-- Hero Section -->
-<div class="about-hero">
-    <div class="container-fluid px-5">
-        <div class="row align-items-center">
-            <div class="col-lg-8 mx-auto text-center text-white">
-                <i class="bi bi-book display-1 mb-4"></i>
-                <h1 class="display-3 fw-bold mb-4">À propos d'ArEM</h1>
-                <p class="lead fs-4">
-                    La plateforme institutionnelle de gestion et de diffusion<br>
-                    des travaux académiques de l'ENS Maroua
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid px-5 pb-5">
+<div class="container-fluid px-5 py-5">
     <div class="row justify-content-center">
         <div class="col-lg-10">
+            <h1 class="display-5 fw-bold mb-2">À propos d'ArEM</h1>
+            <p class="text-muted mb-4">La plateforme institutionnelle de gestion et de diffusion des travaux académiques de l'ENS Maroua</p>
+
             <!-- Mission -->
-            <div class="mission-card">
-                <div class="row align-items-center">
-                    <div class="col-lg-2 text-center">
-                        <i class="bi bi-bullseye display-3" style="color: #0040A0;"></i>
-                    </div>
-                    <div class="col-lg-10">
-                        <h2 class="fw-bold mb-3" style="color: #0040A0;">Notre Mission</h2>
-                        <p class="lead mb-3">
-                            <strong>ArEM</strong> (Archives de l'École Normale Supérieure de Maroua) est un dépôt institutionnel numérique
-                            conçu pour archiver, gérer et diffuser les productions académiques de l'ENS de Maroua.
-                        </p>
-                        <p class="mb-0">
-                            Inspiré de HAL mais adapté au contexte local, ArEM offre une solution simple, pédagogique et efficace
-                            pour préserver et valoriser la connaissance académique produite au sein de notre institution.
-                        </p>
-                    </div>
+            <div class="card mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-3"><i class="bi bi-bullseye text-primary me-2"></i>Notre Mission</h3>
+                    <p class="lead mb-3">
+                        <strong>ArEM</strong> (Archives de l'École Normale Supérieure de Maroua) est un dépôt institutionnel numérique
+                        conçu pour archiver, gérer et diffuser les productions académiques de l'ENS de Maroua.
+                    </p>
+                    <p class="mb-0">
+                        Inspiré de HAL mais adapté au contexte local, ArEM offre une solution simple, pédagogique et efficace
+                        pour préserver et valoriser la connaissance académique produite au sein de notre institution.
+                    </p>
                 </div>
             </div>
 
             <!-- Objectifs -->
-            <div class="mb-5">
-                <div class="text-center mb-5">
-                    <h2 class="fw-bold display-6" style="color: #0040A0;">Nos Objectifs</h2>
-                    <p class="text-muted">ArEM s'engage à remplir quatre missions essentielles</p>
-                </div>
+            <div class="card mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-4">Nos Objectifs</h3>
+                    <p class="text-muted mb-4">ArEM s'engage à remplir quatre missions essentielles</p>
 
-                <div class="row g-4">
-                    <div class="col-md-6">
-                        <div class="value-item">
-                            <div class="value-icon">
-                                <i class="bi bi-upload"></i>
-                            </div>
-                            <div>
-                                <h5 class="fw-bold mb-2" style="color: #0040A0;">Déposer</h5>
-                                <p class="mb-0 text-muted">
-                                    Permettre aux chercheurs, enseignants et étudiants de déposer leurs travaux
-                                    académiques avec des métadonnées complètes et standardisées.
-                                </p>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <i class="bi bi-upload text-primary fs-4 me-3"></i>
+                                <div>
+                                    <h5 class="fw-bold mb-2">Déposer</h5>
+                                    <p class="mb-0 text-muted">
+                                        Permettre aux chercheurs, enseignants et étudiants de déposer leurs travaux
+                                        académiques avec des métadonnées complètes et standardisées.
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-6">
-                        <div class="value-item">
-                            <div class="value-icon">
-                                <i class="bi bi-check2-circle"></i>
-                            </div>
-                            <div>
-                                <h5 class="fw-bold mb-2" style="color: #0040A0;">Valider</h5>
-                                <p class="mb-0 text-muted">
-                                    Assurer la qualité et l'authenticité des documents à travers un workflow
-                                    de validation académique rigoureux et transparent.
-                                </p>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <i class="bi bi-check2-circle text-primary fs-4 me-3"></i>
+                                <div>
+                                    <h5 class="fw-bold mb-2">Valider</h5>
+                                    <p class="mb-0 text-muted">
+                                        Assurer la qualité et l'authenticité des documents à travers un workflow
+                                        de validation académique rigoureux et transparent.
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-6">
-                        <div class="value-item">
-                            <div class="value-icon">
-                                <i class="bi bi-shield-check"></i>
-                            </div>
-                            <div>
-                                <h5 class="fw-bold mb-2" style="color: #0040A0;">Conserver</h5>
-                                <p class="mb-0 text-muted">
-                                    Garantir la préservation à long terme des documents dans un stockage sécurisé
-                                    avec attribution d'identifiants pérennes (ArEM-ID).
-                                </p>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <i class="bi bi-shield-check text-primary fs-4 me-3"></i>
+                                <div>
+                                    <h5 class="fw-bold mb-2">Conserver</h5>
+                                    <p class="mb-0 text-muted">
+                                        Garantir la préservation à long terme des documents dans un stockage sécurisé
+                                        avec attribution d'identifiants pérennes (ArEM-ID).
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-6">
-                        <div class="value-item">
-                            <div class="value-icon">
-                                <i class="bi bi-globe"></i>
-                            </div>
-                            <div>
-                                <h5 class="fw-bold mb-2" style="color: #0040A0;">Diffuser</h5>
-                                <p class="mb-0 text-muted">
-                                    Rendre accessible la production scientifique avec différents niveaux d'accès
-                                    (public, restreint, embargo) selon les besoins.
-                                </p>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <i class="bi bi-globe text-primary fs-4 me-3"></i>
+                                <div>
+                                    <h5 class="fw-bold mb-2">Diffuser</h5>
+                                    <p class="mb-0 text-muted">
+                                        Rendre accessible la production scientifique avec différents niveaux d'accès
+                                        (public, restreint, embargo) selon les besoins.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -214,54 +87,39 @@
             </div>
 
             <!-- Types de documents -->
-            <div class="mb-5">
-                <div class="text-center mb-5">
-                    <h2 class="fw-bold display-6" style="color: #0040A0;">Types de Documents Acceptés</h2>
-                    <p class="text-muted">ArEM héberge une grande variété de productions académiques</p>
-                </div>
+            <div class="card mb-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-4">Types de Documents Acceptés</h3>
+                    <p class="text-muted mb-4">ArEM héberge une grande variété de productions académiques</p>
 
-                <div class="row g-4">
-                    <div class="col-md-4">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="bi bi-file-earmark-text"></i>
-                            </div>
-                            <h4 class="fw-bold mb-3" style="color: #0040A0;">Mémoires & Thèses</h4>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <h5 class="fw-bold mb-3"><i class="bi bi-file-earmark-text text-primary me-2"></i>Mémoires & Thèses</h5>
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-check2 me-2" style="color: #5AC8FA;"></i>Mémoires de Licence</li>
-                                <li><i class="bi bi-check2 me-2" style="color: #5AC8FA;"></i>Mémoires de Master</li>
-                                <li><i class="bi bi-check2 me-2" style="color: #5AC8FA;"></i>Mémoires de DIPES II</li>
-                                <li><i class="bi bi-check2 me-2" style="color: #5AC8FA;"></i>Thèses de Doctorat</li>
+                                <li><i class="bi bi-check2 text-success me-2"></i>Mémoires de Licence</li>
+                                <li><i class="bi bi-check2 text-success me-2"></i>Mémoires de Master</li>
+                                <li><i class="bi bi-check2 text-success me-2"></i>Mémoires de DIPES II</li>
+                                <li><i class="bi bi-check2 text-success me-2"></i>Thèses de Doctorat</li>
                             </ul>
                         </div>
-                    </div>
 
-                    <div class="col-md-4">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="bi bi-journal-text"></i>
-                            </div>
-                            <h4 class="fw-bold mb-3" style="color: #0040A0;">Publications</h4>
+                        <div class="col-md-4">
+                            <h5 class="fw-bold mb-3"><i class="bi bi-journal-text text-primary me-2"></i>Publications</h5>
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-check2 me-2" style="color: #5AC8FA;"></i>Articles scientifiques</li>
-                                <li><i class="bi bi-check2 me-2" style="color: #5AC8FA;"></i>Communications</li>
-                                <li><i class="bi bi-check2 me-2" style="color: #5AC8FA;"></i>Articles de blog</li>
-                                <li><i class="bi bi-check2 me-2" style="color: #5AC8FA;"></i>Ouvrages</li>
+                                <li><i class="bi bi-check2 text-success me-2"></i>Articles scientifiques</li>
+                                <li><i class="bi bi-check2 text-success me-2"></i>Communications</li>
+                                <li><i class="bi bi-check2 text-success me-2"></i>Articles de blog</li>
+                                <li><i class="bi bi-check2 text-success me-2"></i>Ouvrages</li>
                             </ul>
                         </div>
-                    </div>
 
-                    <div class="col-md-4">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="bi bi-briefcase"></i>
-                            </div>
-                            <h4 class="fw-bold mb-3" style="color: #0040A0;">Autres Documents</h4>
+                        <div class="col-md-4">
+                            <h5 class="fw-bold mb-3"><i class="bi bi-briefcase text-primary me-2"></i>Autres Documents</h5>
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-check2 me-2" style="color: #5AC8FA;"></i>Rapports de stage</li>
-                                <li><i class="bi bi-check2 me-2" style="color: #5AC8FA;"></i>Supports pédagogiques</li>
-                                <li><i class="bi bi-check2 me-2" style="color: #5AC8FA;"></i>Projets académiques</li>
-                                <li><i class="bi bi-check2 me-2" style="color: #5AC8FA;"></i>Rapports de recherche</li>
+                                <li><i class="bi bi-check2 text-success me-2"></i>Rapports de stage</li>
+                                <li><i class="bi bi-check2 text-success me-2"></i>Supports pédagogiques</li>
+                                <li><i class="bi bi-check2 text-success me-2"></i>Projets académiques</li>
+                                <li><i class="bi bi-check2 text-success me-2"></i>Rapports de recherche</li>
                             </ul>
                         </div>
                     </div>
@@ -269,61 +127,43 @@
             </div>
 
             <!-- Stats Section -->
-            <div class="stats-section">
-                <div class="container">
-                    <div class="row">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body p-4">
+                    <div class="row text-center">
                         <div class="col-md-3">
-                            <div class="stat-item">
-                                <div class="stat-number">
-                                    <i class="bi bi-infinity"></i>
-                                </div>
-                                <div class="stat-label">Capacité de stockage évolutive</div>
-                            </div>
+                            <i class="bi bi-infinity display-4 mb-2"></i>
+                            <p class="mb-0">Capacité de stockage évolutive</p>
                         </div>
                         <div class="col-md-3">
-                            <div class="stat-item">
-                                <div class="stat-number">
-                                    <i class="bi bi-shield-check"></i>
-                                </div>
-                                <div class="stat-label">Sécurité et confidentialité</div>
-                            </div>
+                            <i class="bi bi-shield-check display-4 mb-2"></i>
+                            <p class="mb-0">Sécurité et confidentialité</p>
                         </div>
                         <div class="col-md-3">
-                            <div class="stat-item">
-                                <div class="stat-number">
-                                    <i class="bi bi-clock-history"></i>
-                                </div>
-                                <div class="stat-label">Conservation pérenne</div>
-                            </div>
+                            <i class="bi bi-clock-history display-4 mb-2"></i>
+                            <p class="mb-0">Conservation pérenne</p>
                         </div>
                         <div class="col-md-3">
-                            <div class="stat-item">
-                                <div class="stat-number">
-                                    <i class="bi bi-search"></i>
-                                </div>
-                                <div class="stat-label">Recherche avancée</div>
-                            </div>
+                            <i class="bi bi-search display-4 mb-2"></i>
+                            <p class="mb-0">Recherche avancée</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- CTA Section -->
-            <div class="text-center mt-5">
-                <div class="card border-0" style="background: linear-gradient(135deg, rgba(0, 64, 160, 0.05) 0%, rgba(90, 200, 250, 0.05) 100%); border-radius: 15px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
-                    <div class="card-body p-5">
-                        <h3 class="fw-bold mb-3" style="color: #0040A0;">Rejoignez ArEM</h3>
-                        <p class="lead mb-4">
-                            Participez à la valorisation de la production académique de l'ENS Maroua
-                        </p>
-                        <div class="d-flex gap-3 justify-content-center">
-                            <a href="{{ route('documents.create') }}" class="btn btn-lg" style="background: linear-gradient(135deg, #0040A0 0%, #5AC8FA 100%); color: white; border-radius: 12px; padding: 14px 40px; font-weight: 600;">
-                                <i class="bi bi-upload me-2"></i>Déposer un document
-                            </a>
-                            <a href="{{ route('documents.index') }}" class="btn btn-lg" style="border: 2px solid #5AC8FA; color: #0040A0; border-radius: 12px; padding: 14px 40px; font-weight: 600;">
-                                <i class="bi bi-search me-2"></i>Explorer les archives
-                            </a>
-                        </div>
+            <div class="card">
+                <div class="card-body p-4 text-center">
+                    <h3 class="fw-bold mb-3">Rejoignez ArEM</h3>
+                    <p class="lead mb-4">
+                        Participez à la valorisation de la production académique de l'ENS Maroua
+                    </p>
+                    <div class="d-flex gap-3 justify-content-center">
+                        <a href="{{ route('documents.create') }}" class="btn btn-primary">
+                            <i class="bi bi-upload me-2"></i>Déposer un document
+                        </a>
+                        <a href="{{ route('documents.index') }}" class="btn btn-outline-primary">
+                            <i class="bi bi-search me-2"></i>Explorer les archives
+                        </a>
                     </div>
                 </div>
             </div>
