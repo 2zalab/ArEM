@@ -8,30 +8,6 @@
         background: linear-gradient(135deg, #0040A0 0%, #5AC8FA 100%);
         padding: 80px 0;
         margin-bottom: 50px;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .about-hero::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        right: -10%;
-        width: 500px;
-        height: 500px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
-    }
-
-    .about-hero::after {
-        content: '';
-        position: absolute;
-        bottom: -30%;
-        left: -5%;
-        width: 400px;
-        height: 400px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 50%;
     }
 
     .mission-card {
@@ -45,36 +21,18 @@
 
     .feature-card {
         border: none;
-        border-radius: 20px;
+        border-radius: 15px;
         padding: 30px;
         height: 100%;
         background: white;
-        box-shadow: 0 10px 30px rgba(0, 64, 160, 0.08);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         transition: all 0.3s;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .feature-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 5px;
-        background: linear-gradient(90deg, #0040A0 0%, #5AC8FA 100%);
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.3s;
-    }
-
-    .feature-card:hover::before {
-        transform: scaleX(1);
+        border-top: 4px solid #5AC8FA;
     }
 
     .feature-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 40px rgba(0, 64, 160, 0.15);
+        transform: translateY(-5px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
     }
 
     .feature-icon {
@@ -150,7 +108,7 @@
 <div class="about-hero">
     <div class="container-fluid px-5">
         <div class="row align-items-center">
-            <div class="col-lg-8 mx-auto text-center text-white position-relative" style="z-index: 1;">
+            <div class="col-lg-8 mx-auto text-center text-white">
                 <i class="bi bi-book display-1 mb-4"></i>
                 <h1 class="display-3 fw-bold mb-4">À propos d'ArEM</h1>
                 <p class="lead fs-4">
@@ -352,7 +310,7 @@
 
             <!-- CTA Section -->
             <div class="text-center mt-5">
-                <div class="card border-0" style="background: linear-gradient(135deg, rgba(0, 64, 160, 0.05) 0%, rgba(90, 200, 250, 0.05) 100%); border-radius: 20px;">
+                <div class="card border-0" style="background: linear-gradient(135deg, rgba(0, 64, 160, 0.05) 0%, rgba(90, 200, 250, 0.05) 100%); border-radius: 15px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
                     <div class="card-body p-5">
                         <h3 class="fw-bold mb-3" style="color: #0040A0;">Rejoignez ArEM</h3>
                         <p class="lead mb-4">

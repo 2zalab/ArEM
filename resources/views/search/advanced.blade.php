@@ -8,19 +8,18 @@
         background: linear-gradient(135deg, #0040A0 0%, #5AC8FA 100%);
         padding: 60px 0;
         margin-bottom: 40px;
-        border-radius: 0 0 30px 30px;
     }
 
     .search-card {
         border: none;
-        border-radius: 20px;
-        box-shadow: 0 10px 40px rgba(0, 64, 160, 0.1);
+        border-radius: 15px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         transition: all 0.3s;
     }
 
     .search-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 50px rgba(0, 64, 160, 0.15);
+        transform: translateY(-3px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
     }
 
     .form-label {

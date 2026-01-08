@@ -8,45 +8,21 @@
         background: linear-gradient(135deg, #0040A0 0%, #5AC8FA 100%);
         padding: 80px 0;
         margin-bottom: 50px;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .contact-hero::before {
-        content: '';
-        position: absolute;
-        top: -20%;
-        right: -5%;
-        width: 400px;
-        height: 400px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
-    }
-
-    .contact-hero::after {
-        content: '';
-        position: absolute;
-        bottom: -20%;
-        left: -5%;
-        width: 350px;
-        height: 350px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 50%;
     }
 
     .contact-card {
         border: none;
-        border-radius: 20px;
+        border-radius: 15px;
         padding: 40px;
         background: white;
-        box-shadow: 0 10px 40px rgba(0, 64, 160, 0.1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         transition: all 0.3s;
         height: 100%;
     }
 
     .contact-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 50px rgba(0, 64, 160, 0.15);
+        transform: translateY(-5px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
     }
 
     .contact-icon {
@@ -69,8 +45,8 @@
 
     .form-card {
         border: none;
-        border-radius: 20px;
-        box-shadow: 0 10px 40px rgba(0, 64, 160, 0.1);
+        border-radius: 15px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         overflow: hidden;
     }
 
@@ -181,7 +157,7 @@
 <div class="contact-hero">
     <div class="container-fluid px-5">
         <div class="row align-items-center">
-            <div class="col-lg-8 mx-auto text-center text-white position-relative" style="z-index: 1;">
+            <div class="col-lg-8 mx-auto text-center text-white">
                 <i class="bi bi-envelope-heart display-1 mb-4"></i>
                 <h1 class="display-3 fw-bold mb-4">Contactez-nous</h1>
                 <p class="lead fs-4">
@@ -317,7 +293,7 @@
                 <!-- Additional Info -->
                 <div class="col-lg-5">
                     <!-- Quick Info -->
-                    <div class="card border-0" style="border-radius: 20px; background: linear-gradient(135deg, rgba(0, 64, 160, 0.05) 0%, rgba(90, 200, 250, 0.05) 100%); padding: 30px; margin-bottom: 25px;">
+                    <div class="card border-0" style="border-radius: 15px; background: linear-gradient(135deg, rgba(0, 64, 160, 0.05) 0%, rgba(90, 200, 250, 0.05) 100%); padding: 30px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
                         <h4 class="fw-bold mb-4" style="color: #0040A0;">
                             <i class="bi bi-info-circle me-2"></i>Informations utiles
                         </h4>
@@ -354,7 +330,7 @@
                     </div>
 
                     <!-- FAQ Preview -->
-                    <div class="card border-0" style="border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 64, 160, 0.08); padding: 30px;">
+                    <div class="card border-0" style="border-radius: 15px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); padding: 30px;">
                         <h4 class="fw-bold mb-4" style="color: #0040A0;">
                             <i class="bi bi-question-circle me-2"></i>Questions fréquentes
                         </h4>
