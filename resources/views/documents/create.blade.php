@@ -4,16 +4,78 @@
 
 @section('styles')
 <style>
-    .step-card {
-        border: none;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        border-radius: 12px;
-        overflow: hidden;
-        transition: box-shadow 0.3s ease;
+    /* Progress Indicator */
+    .progress-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 3rem;
+        padding: 0 2rem;
     }
 
-    .step-card:hover {
-        box-shadow: 0 4px 16px rgba(0, 64, 160, 0.15);
+    .progress-step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+        position: relative;
+    }
+
+    .progress-step:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        width: 100%;
+        height: 3px;
+        background: #e9ecef;
+        z-index: 0;
+    }
+
+    .progress-step.active:not(:last-child)::after {
+        background: linear-gradient(90deg, #0040A0 0%, #5AC8FA 100%);
+    }
+
+    .progress-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #e9ecef;
+        color: #6c757d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.1rem;
+        position: relative;
+        z-index: 1;
+        transition: all 0.3s ease;
+    }
+
+    .progress-step.active .progress-circle {
+        background: linear-gradient(135deg, #0040A0 0%, #5AC8FA 100%);
+        color: white;
+        transform: scale(1.1);
+    }
+
+    .progress-label {
+        margin-top: 0.5rem;
+        font-size: 0.85rem;
+        color: #6c757d;
+        text-align: center;
+        font-weight: 500;
+    }
+
+    .progress-step.active .progress-label {
+        color: #0040A0;
+        font-weight: 600;
+    }
+
+    .step-card {
+        border: 1px solid #dee2e6;
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 1.5rem;
     }
 
     .step-header {
@@ -64,13 +126,10 @@
         border: none;
         font-weight: 600;
         padding: 0.75rem 1.5rem;
-        transition: all 0.3s ease;
     }
 
     .btn-primary:hover {
         background: linear-gradient(135deg, #5AC8FA 0%, #0040A0 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 64, 160, 0.3);
     }
 
     .btn-outline-primary {
@@ -78,34 +137,22 @@
         border-color: #0040A0;
         border-width: 2px;
         font-weight: 600;
-        transition: all 0.3s ease;
     }
 
     .btn-outline-primary:hover {
         background-color: #0040A0;
         border-color: #0040A0;
         color: white;
-        transform: translateY(-2px);
     }
 
     .btn-outline-secondary {
         border-width: 2px;
         font-weight: 500;
-        transition: all 0.3s ease;
-    }
-
-    .btn-outline-secondary:hover {
-        transform: translateY(-2px);
     }
 
     .author-card {
         border: 2px solid #e9ecef;
         border-radius: 8px;
-        transition: border-color 0.3s ease;
-    }
-
-    .author-card:hover {
-        border-color: #5AC8FA;
     }
 
     .keyword-badge {
@@ -182,6 +229,30 @@
                         <h1 class="fw-bold mb-0">Déposer un document</h1>
                         <p class="text-muted mb-0">Ajoutez un nouveau document aux archives</p>
                     </div>
+                </div>
+            </div>
+
+            <!-- Progress Indicator -->
+            <div class="progress-container">
+                <div class="progress-step active" data-step="1">
+                    <div class="progress-circle">1</div>
+                    <div class="progress-label">Type</div>
+                </div>
+                <div class="progress-step" data-step="2">
+                    <div class="progress-circle">2</div>
+                    <div class="progress-label">Informations</div>
+                </div>
+                <div class="progress-step" data-step="3">
+                    <div class="progress-circle">3</div>
+                    <div class="progress-label">Métadonnées</div>
+                </div>
+                <div class="progress-step" data-step="4">
+                    <div class="progress-circle">4</div>
+                    <div class="progress-label">Fichier</div>
+                </div>
+                <div class="progress-step" data-step="5">
+                    <div class="progress-circle">5</div>
+                    <div class="progress-label">Accès</div>
                 </div>
             </div>
 
@@ -767,10 +838,68 @@ function removeAuthor(index) {
     }
 }
 
+// Progress tracking
+function updateProgress(stepNumber) {
+    const steps = document.querySelectorAll('.progress-step');
+    steps.forEach((step, index) => {
+        if (index < stepNumber) {
+            step.classList.add('active');
+        }
+    });
+}
+
+// Track form interactions to update progress
+function setupProgressTracking() {
+    // Step 1: Type de document
+    document.getElementById('document_type_id')?.addEventListener('change', function() {
+        if (this.value) {
+            updateProgress(1);
+        }
+    });
+
+    // Step 2: Informations générales
+    document.getElementById('title')?.addEventListener('input', function() {
+        if (this.value) {
+            updateProgress(2);
+        }
+    });
+
+    // Step 3: Métadonnées (auto-update when metadata card is visible)
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.target.id === 'metadataCard') {
+                if (mutation.target.style.display !== 'none') {
+                    updateProgress(3);
+                }
+            }
+        });
+    });
+
+    const metadataCard = document.getElementById('metadataCard');
+    if (metadataCard) {
+        observer.observe(metadataCard, { attributes: true, attributeFilter: ['style'] });
+    }
+
+    // Step 4: Fichier
+    document.getElementById('file')?.addEventListener('change', function() {
+        if (this.files.length > 0) {
+            updateProgress(4);
+        }
+    });
+
+    // Step 5: Droits d'accès
+    document.querySelectorAll('input[name="access_rights"]').forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            updateProgress(5);
+        });
+    });
+}
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
     updateRequiredFields();
     toggleEmbargoDate();
+    setupProgressTracking();
 
     // Load existing keywords from old() values (Laravel validation)
     @if(old('keywords'))
