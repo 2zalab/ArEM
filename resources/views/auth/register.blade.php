@@ -46,33 +46,43 @@
         <!-- Password -->
         <div class="mb-3">
             <label for="password" class="form-label">Mot de passe</label>
-            <input
-                type="password"
-                class="form-control @error('password') is-invalid @enderror"
-                id="password"
-                name="password"
-                required
-                autocomplete="new-password"
-            >
-            @error('password')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+            <div class="input-group">
+                <input
+                    type="password"
+                    class="form-control @error('password') is-invalid @enderror"
+                    id="password"
+                    name="password"
+                    required
+                    autocomplete="new-password"
+                >
+                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('password')">
+                    <i class="bi bi-eye" id="password-icon"></i>
+                </button>
+                @error('password')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
         </div>
 
         <!-- Confirm Password -->
         <div class="mb-3">
             <label for="password_confirmation" class="form-label">Confirmer le mot de passe</label>
-            <input
-                type="password"
-                class="form-control @error('password_confirmation') is-invalid @enderror"
-                id="password_confirmation"
-                name="password_confirmation"
-                required
-                autocomplete="new-password"
-            >
-            @error('password_confirmation')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+            <div class="input-group">
+                <input
+                    type="password"
+                    class="form-control @error('password_confirmation') is-invalid @enderror"
+                    id="password_confirmation"
+                    name="password_confirmation"
+                    required
+                    autocomplete="new-password"
+                >
+                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('password_confirmation')">
+                    <i class="bi bi-eye" id="password_confirmation-icon"></i>
+                </button>
+                @error('password_confirmation')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
         </div>
 
         <div class="d-grid gap-2 mb-3">
@@ -90,4 +100,21 @@
             </a>
         </div>
     </form>
+
+    <script>
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            const icon = document.getElementById(fieldId + '-icon');
+
+            if (field.type === 'password') {
+                field.type = 'text';
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            } else {
+                field.type = 'password';
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            }
+        }
+    </script>
 </x-guest-layout>
