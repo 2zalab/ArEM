@@ -18,7 +18,7 @@
                         conçu pour archiver, gérer et diffuser les productions académiques de l'ENS de Maroua.
                     </p>
                     <p class="mb-0">
-                        Inspiré de HAL mais adapté au contexte local, ArEM offre une solution simple, pédagogique et efficace
+                        Adapté au contexte local, ArEM offre une solution simple, pédagogique et efficace
                         pour préserver et valoriser la connaissance académique produite au sein de notre institution.
                     </p>
                 </div>

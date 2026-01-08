@@ -253,7 +253,7 @@
                 <div class="logo">
                     <img src="{{ asset('images/logo.jpg') }}" alt="Logo ArEM">
                 </div>
-                <h1>ArEM</h1>
+                <!--h1>ArEM</h1-->
                 <p class="lead">
                     Archives de l'École Normale Supérieure de Maroua
                 </p>
