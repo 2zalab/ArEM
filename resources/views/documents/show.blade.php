@@ -130,11 +130,9 @@
                         <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#shareModal">
                             <i class="bi bi-share me-2"></i>Partager
                         </button>
-                        @if($document->citation)
-                            <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#citeModal">
-                                <i class="bi bi-quote me-2"></i>Citer
-                            </button>
-                        @endif
+                        <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#citeModal">
+                            <i class="bi bi-quote me-2"></i>Citer
+                        </button>
                     </div>
                 </div>
             </div>
