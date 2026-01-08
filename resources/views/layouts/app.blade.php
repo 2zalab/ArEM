@@ -14,8 +14,8 @@
     <!-- Custom Styles -->
     <style>
         :root {
-            --primary-color: #003366;
-            --secondary-color: #0099cc;
+            --primary-color: #0040A0;
+            --secondary-color: #5AC8FA;
         }
 
         body {
@@ -85,7 +85,7 @@
         }
 
         .nav-logo{
-            max-width: 80px;
+            max-width: 50px;
             margin-right: 2px;
         }
     </style>
@@ -97,7 +97,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
         <div class="container-fluid px-5">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <img src="{{ asset('images/logo.jpg') }}" class="nav-logo"> ArEM
+                <img src="{{ asset('images/logo.jpg') }}" class="nav-logo">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

@@ -6,7 +6,7 @@
 <style>
     .hero-section {
         position: relative;
-        background: linear-gradient(135deg, #003366 0%, #0099cc 100%);
+        background: linear-gradient(135deg, #0040A0 0%, #5AC8FA 100%);
         background-image:
             linear-gradient(135deg, rgba(0, 51, 102, 0.92) 0%, rgba(0, 153, 204, 0) 100%),
             url('/images/univ-maroua.jpg');
@@ -54,7 +54,7 @@
     }
 
     .search-box button {
-        background: linear-gradient(135deg, #00b894, #00cec9);
+        background: linear-gradient(135deg, #0040A0, #5AC8FA);
         border: none;
         border-radius: 40px;
         padding: 12px 32px;
@@ -82,7 +82,7 @@
 
     .stat-card i {
         font-size: 3rem;
-        background: linear-gradient(135deg, #003366, #0099cc);
+        background: linear-gradient(135deg, #0040A0, #5AC8FA);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -91,16 +91,16 @@
     .stat-card h3 {
         font-size: 2.5rem;
         font-weight: 700;
-        color: #003366;
+        color: #0040A0;
         margin: 16px 0 8px;
     }
 
     .document-card {
-        border-left: 4px solid #0099cc;
+        border-left: 4px solid #5AC8FA;
     }
 
     .document-card:hover {
-        border-left-color: #003366;
+        border-left-color: #0040A0;
     }
 </style>
 @endsection

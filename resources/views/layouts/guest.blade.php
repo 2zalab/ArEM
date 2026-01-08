@@ -13,8 +13,8 @@
 
     <style>
         :root {
-            --primary-color: #003366;
-            --secondary-color: #0099cc;
+            --primary-color: #0040A0;
+            --secondary-color: #5AC8FA;
         }
 
         body {
