@@ -6,10 +6,10 @@
 <style>
     .hero-section {
         position: relative;
-        background: linear-gradient(135deg, #003366 0%, #0099cc 100%);
+        background: linear-gradient(135deg, #0040A0 0%, #5AC8FA 100%);
         background-image:
-            linear-gradient(135deg, rgba(0, 51, 102, 0.92) 0%, rgba(0, 153, 204, 0.88) 100%),
-            url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1920&h=600&fit=crop');
+            linear-gradient(135deg, rgba(0, 51, 102, 0.92) 0%, rgba(0, 153, 204, 0) 100%),
+            url('/images/univ-maroua.jpg');
         background-size: cover;
         background-position: center;
         padding: 80px 0;
@@ -54,7 +54,7 @@
     }
 
     .search-box button {
-        background: linear-gradient(135deg, #00b894, #00cec9);
+        background: linear-gradient(135deg, #0040A0, #5AC8FA);
         border: none;
         border-radius: 40px;
         padding: 12px 32px;
@@ -82,7 +82,7 @@
 
     .stat-card i {
         font-size: 3rem;
-        background: linear-gradient(135deg, #003366, #0099cc);
+        background: linear-gradient(135deg, #0040A0, #5AC8FA);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -91,16 +91,16 @@
     .stat-card h3 {
         font-size: 2.5rem;
         font-weight: 700;
-        color: #003366;
+        color: #0040A0;
         margin: 16px 0 8px;
     }
 
     .document-card {
-        border-left: 4px solid #0099cc;
+        border-left: 4px solid #5AC8FA;
     }
 
     .document-card:hover {
-        border-left-color: #003366;
+        border-left-color: #0040A0;
     }
 </style>
 @endsection
@@ -110,7 +110,6 @@
 <div class="hero-section">
     <div class="container-fluid px-5">
         <div class="text-center text-white mb-5">
-            <img src="{{ asset('images/logo.jpg') }}" alt="ArEM Logo" class="hero-logo">
             <h1 class="display-4 fw-bold mb-3">Explorez, partagez et valorisez</h1>
             <p class="lead mb-4">la production scientifique et académique de notre institution</p>
         </div>
@@ -263,10 +262,10 @@
 </div>
 
 <!-- Partners Section -->
-<div class="container-fluid px-5 py-5 mt-5" style="background: linear-gradient(to bottom, #f8f9fa, #ffffff);">
+<div class="container-fluid px-5 py-0 mt-5" style="background: linear-gradient(to bottom, #f8f9fa, #ffffff);">
     <div class="text-center mb-5">
-        <h3 class="fw-bold" style="color: var(--primary-color);">Nos Partenaires</h3>
-        <p class="text-muted">En collaboration avec</p>
+        <h3 class="fw-bold" style="color: var(--primary-color);">En collaboration avec</h3>
+        <!--p class="text-muted">En collaboration avec</p-->
     </div>
     <div class="row justify-content-center align-items-center g-5">
         <div class="col-lg-3 col-md-4 col-sm-6 text-center">
@@ -274,9 +273,9 @@
                 <img src="{{ asset('images/minesup.png') }}"
                      alt="MINESUP"
                      class="img-fluid partner-logo"
-                     style="max-height: 120px; filter: grayscale(100%); transition: all 0.3s;"
+                     style="max-height: 120px; filter: grayscale(00%); transition: all 0.3s;"
                      onmouseover="this.style.filter='grayscale(0%)'"
-                     onmouseout="this.style.filter='grayscale(100%)'">
+                     onmouseout="this.style.filter='grayscale(00%)'">
             </div>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 text-center">
@@ -284,9 +283,9 @@
                 <img src="{{ asset('images/univ-maroua.png') }}"
                      alt="Université de Maroua"
                      class="img-fluid partner-logo"
-                     style="max-height: 120px; filter: grayscale(100%); transition: all 0.3s;"
+                     style="max-height: 120px; filter: grayscale(00%); transition: all 0.3s;"
                      onmouseover="this.style.filter='grayscale(0%)'"
-                     onmouseout="this.style.filter='grayscale(100%)'">
+                     onmouseout="this.style.filter='grayscale(00%)'">
             </div>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 text-center">
@@ -294,9 +293,9 @@
                 <img src="{{ asset('images/ens.png') }}"
                      alt="ENS Maroua"
                      class="img-fluid partner-logo"
-                     style="max-height: 120px; filter: grayscale(100%); transition: all 0.3s;"
+                     style="max-height: 120px; filter: grayscale(00%); transition: all 0.3s;"
                      onmouseover="this.style.filter='grayscale(0%)'"
-                     onmouseout="this.style.filter='grayscale(100%)'">
+                     onmouseout="this.style.filter='grayscale(00%)'">
             </div>
         </div>
     </div>

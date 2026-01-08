@@ -13,8 +13,8 @@
 
     <style>
         :root {
-            --primary-color: #003366;
-            --secondary-color: #0099cc;
+            --primary-color: #0040A0;
+            --secondary-color: #5AC8FA;
         }
 
         body {
@@ -35,8 +35,8 @@
             position: relative;
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             background-image:
-                linear-gradient(135deg, rgba(0, 51, 102, 0.9) 0%, rgba(0, 153, 204, 0.85) 100%),
-                url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&h=1200&fit=crop');
+                linear-gradient(135deg, rgba(0, 51, 102, 0.9) 0%, rgba(0, 153, 204, 0) 100%),
+                url('/images/univ-maroua.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -81,7 +81,6 @@
 
         .auth-left .logo img {
             max-width: 150px;
-            filter: brightness(0) invert(1);
         }
 
         /* Right side - Form */
@@ -254,7 +253,7 @@
                 <div class="logo">
                     <img src="{{ asset('images/logo.jpg') }}" alt="Logo ArEM">
                 </div>
-                <h1>ArEM</h1>
+                <!--h1>ArEM</h1-->
                 <p class="lead">
                     Archives de l'École Normale Supérieure de Maroua
                 </p>
