@@ -219,6 +219,27 @@ class DocumentController extends Controller
             ->with('success', 'Document supprimé avec succès');
     }
 
+    public function preview($aremDocId)
+    {
+        $document = Document::where('arem_doc_id', $aremDocId)->firstOrFail();
+
+        // Check access permissions
+        if (!$document->isAccessible() && (!Auth::check() || (Auth::user()->id !== $document->user_id && !Auth::user()->canValidateDocuments()))) {
+            abort(403, 'Accès non autorisé');
+        }
+
+        $filePath = storage_path('app/private/' . $document->file_path);
+
+        if (!file_exists($filePath)) {
+            abort(404, 'Fichier non trouvé');
+        }
+
+        return response()->file($filePath, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . $document->file_name . '"'
+        ]);
+    }
+
     public function download($aremDocId)
     {
         $document = Document::where('arem_doc_id', $aremDocId)->firstOrFail();
