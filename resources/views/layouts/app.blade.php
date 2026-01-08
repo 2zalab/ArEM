@@ -33,6 +33,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-align: center;
         }
 
         .nav-link {
@@ -43,12 +44,12 @@
         }
 
         .nav-link:hover {
-            color: var(--secondary-color) !important;
+            color: var(--primary-color) !important;
         }
 
         .nav-link.active {
-            color: var(--secondary-color) !important;
-            border-bottom: 3px solid var(--secondary-color);
+            color: var(--primary-color) !important;
+            border-bottom: 3px solid var(--primary-color);
         }
 
         .btn-primary {
@@ -71,7 +72,7 @@
         }
 
         footer {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color) 100%);
             color: white;
             margin-top: 80px;
             padding: 40px 0 20px;
