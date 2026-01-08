@@ -149,6 +149,21 @@
                     </div>
                 </div>
 
+                <!-- Profil / Bio -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <h5><i class="bi bi-file-text me-2"></i>Profil</h5>
+                    </div>
+                    <div class="section-body">
+                        <div class="mb-3">
+                            <label for="bio" class="form-label fw-bold">Présentation professionnelle</label>
+                            <textarea class="form-control" id="bio" name="bio" rows="5"
+                                      placeholder="Rédigez une brève présentation de votre parcours, vos compétences clés et vos objectifs professionnels (3-5 lignes)">{{ old('bio', $user->bio) }}</textarea>
+                            <small class="text-muted">Cette présentation apparaîtra en haut de votre CV</small>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Formation académique -->
                 <div class="section-card">
                     <div class="section-header">
