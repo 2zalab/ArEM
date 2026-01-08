@@ -29,21 +29,19 @@
             color: white;
             padding: 30px;
             margin-bottom: 20px;
-            display: table;
-            width: 100%;
+            position: relative;
         }
 
-        .header-content {
-            display: table-cell;
-            vertical-align: middle;
-            width: 70%;
+        .header-with-photo {
+            padding-right: 130px;
         }
 
         .header-photo {
-            display: table-cell;
-            vertical-align: middle;
-            width: 30%;
-            text-align: right;
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 100px;
+            height: 100px;
         }
 
         .header-photo img {
@@ -103,42 +101,40 @@
         }
 
         .item-header {
-            display: table;
-            width: 100%;
             margin-bottom: 5px;
+            overflow: hidden;
         }
 
         .item-title {
-            display: table-cell;
             font-weight: bold;
             font-size: 11pt;
             color: #0040A0;
+            float: left;
+            width: 70%;
         }
 
         .item-date {
-            display: table-cell;
-            text-align: right;
+            float: right;
             color: #666;
             font-size: 9pt;
+            text-align: right;
+            width: 30%;
         }
 
         .item-subtitle {
             font-style: italic;
             color: #666;
             margin-bottom: 3px;
+            clear: both;
         }
 
         .item-description {
             text-align: justify;
             margin-top: 5px;
+            clear: both;
         }
 
         /* Skills grid */
-        .skills-grid {
-            display: table;
-            width: 100%;
-        }
-
         .skill-item {
             margin-bottom: 8px;
         }
@@ -150,20 +146,21 @@
 
         /* Languages */
         .language-item {
-            display: table;
-            width: 100%;
             margin-bottom: 5px;
+            overflow: hidden;
         }
 
         .language-name {
-            display: table-cell;
             font-weight: bold;
+            float: left;
+            width: 60%;
         }
 
         .language-level {
-            display: table-cell;
-            text-align: right;
+            float: right;
             color: #666;
+            text-align: right;
+            width: 40%;
         }
 
         /* Publications */
@@ -194,41 +191,45 @@
         .page-break {
             page-break-after: always;
         }
+
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Header -->
-        <div class="header">
-            <div class="header-content">
-                <div class="name">{{ $user->name }}</div>
-                <div class="subtitle">
-                    @if($user->grade)
-                        {{ $user->grade }}
-                    @endif
-                    @if($user->institution)
-                        @if($user->grade) - @endif
-                        {{ $user->institution }}
-                    @endif
-                </div>
-                <div class="contact-info">
-                    <div><strong>Email:</strong> {{ $user->email }}</div>
-                    @if($user->phone)
-                        <div><strong>Téléphone:</strong> {{ $user->phone }}</div>
-                    @endif
-                    @if($user->address)
-                        <div><strong>Adresse:</strong> {{ $user->address }}</div>
-                    @endif
-                    @if($user->linkedin)
-                        <div><strong>LinkedIn:</strong> {{ $user->linkedin }}</div>
-                    @endif
-                </div>
-            </div>
+        <div class="header {{ $user->profile_photo ? 'header-with-photo' : '' }}">
             @if($user->profile_photo)
                 <div class="header-photo">
                     <img src="{{ public_path('storage/' . $user->profile_photo) }}" alt="{{ $user->name }}">
                 </div>
             @endif
+            <div class="name">{{ $user->name }}</div>
+            <div class="subtitle">
+                @if($user->grade)
+                    {{ $user->grade }}
+                @endif
+                @if($user->institution)
+                    @if($user->grade) - @endif
+                    {{ $user->institution }}
+                @endif
+            </div>
+            <div class="contact-info">
+                <div><strong>Email:</strong> {{ $user->email }}</div>
+                @if($user->phone)
+                    <div><strong>Téléphone:</strong> {{ $user->phone }}</div>
+                @endif
+                @if($user->address)
+                    <div><strong>Adresse:</strong> {{ $user->address }}</div>
+                @endif
+                @if($user->linkedin)
+                    <div><strong>LinkedIn:</strong> {{ $user->linkedin }}</div>
+                @endif
+            </div>
         </div>
 
         <!-- Bio / Profil -->
@@ -248,7 +249,7 @@
                 <div class="section-content">
                     @foreach($user->education as $edu)
                         <div class="item">
-                            <div class="item-header">
+                            <div class="item-header clearfix">
                                 <div class="item-title">{{ $edu['degree'] ?? '' }}</div>
                                 <div class="item-date">
                                     {{ $edu['start_date'] ?? '' }}
@@ -279,7 +280,7 @@
                 <div class="section-content">
                     @foreach($user->experience as $exp)
                         <div class="item">
-                            <div class="item-header">
+                            <div class="item-header clearfix">
                                 <div class="item-title">{{ $exp['position'] ?? '' }}</div>
                                 <div class="item-date">
                                     {{ $exp['start_date'] ?? '' }}
@@ -308,14 +309,12 @@
             <div class="section">
                 <div class="section-title">Compétences</div>
                 <div class="section-content">
-                    <div class="skills-grid">
-                        @foreach($user->skills as $skill)
-                            <div class="skill-item">
-                                <span class="skill-category">{{ $skill['category'] ?? '' }}:</span>
-                                {{ $skill['items'] ?? '' }}
-                            </div>
-                        @endforeach
-                    </div>
+                    @foreach($user->skills as $skill)
+                        <div class="skill-item">
+                            <span class="skill-category">{{ $skill['category'] ?? '' }}:</span>
+                            {{ $skill['items'] ?? '' }}
+                        </div>
+                    @endforeach
                 </div>
             </div>
         @endif
@@ -326,7 +325,7 @@
                 <div class="section-title">Langues</div>
                 <div class="section-content">
                     @foreach($user->languages as $lang)
-                        <div class="language-item">
+                        <div class="language-item clearfix">
                             <div class="language-name">{{ $lang['language'] ?? '' }}</div>
                             <div class="language-level">{{ $lang['level'] ?? '' }}</div>
                         </div>
@@ -337,7 +336,7 @@
 
         <!-- Publications -->
         @if($user->publications && count($user->publications) > 0)
-            <div class="section page-break">
+            <div class="section">
                 <div class="section-title">Publications</div>
                 <div class="section-content">
                     @foreach($user->publications as $pub)
@@ -370,7 +369,7 @@
                 <div class="section-content">
                     @foreach($user->certifications as $cert)
                         <div class="item">
-                            <div class="item-header">
+                            <div class="item-header clearfix">
                                 <div class="item-title">{{ $cert['name'] ?? '' }}</div>
                                 @if(isset($cert['year']) && $cert['year'])
                                     <div class="item-date">{{ $cert['year'] }}</div>
