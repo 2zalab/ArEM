@@ -60,7 +60,7 @@
 @section('content')
 <div class="container-fluid px-5 py-5">
     <div class="row justify-content-center">
-        <div class="col-lg-10">
+        <div class="col-lg-12">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
                     <h1 class="fw-bold mb-1">Mon CV</h1>

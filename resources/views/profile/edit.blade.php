@@ -5,7 +5,7 @@
 @section('content')
 <div class="container-fluid px-5 py-5">
     <div class="row justify-content-center">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <h1 class="fw-bold mb-4">Paramètres du profil</h1>
 
             @if(session('status') === 'profile-updated')
