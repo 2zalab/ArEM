@@ -112,19 +112,35 @@ class Document extends Model
     public function incrementViews()
     {
         $today = now()->format('Y-m-d');
-        $this->statistics()->updateOrCreate(
-            ['stat_date' => $today],
-            ['views' => 0, 'downloads' => 0]
-        )->increment('views');
+        $stat = $this->statistics()->updateOrCreate(
+            [
+                'document_id' => $this->id,
+                'stat_date' => $today
+            ],
+            [
+                'views' => 0,
+                'downloads' => 0
+            ]
+        );
+        $stat->increment('views');
+        return $stat;
     }
 
     public function incrementDownloads()
     {
         $today = now()->format('Y-m-d');
-        $this->statistics()->updateOrCreate(
-            ['stat_date' => $today],
-            ['views' => 0, 'downloads' => 0]
-        )->increment('downloads');
+        $stat = $this->statistics()->updateOrCreate(
+            [
+                'document_id' => $this->id,
+                'stat_date' => $today
+            ],
+            [
+                'views' => 0,
+                'downloads' => 0
+            ]
+        );
+        $stat->increment('downloads');
+        return $stat;
     }
 
     public function isPublished()
