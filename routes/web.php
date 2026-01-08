@@ -7,6 +7,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ValidationController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CVController;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
@@ -46,6 +47,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/profile/documents', [ProfileController::class, 'documents'])->name('profile.documents');
+
+    // CV routes
+    Route::get('/profile/cv', [CVController::class, 'index'])->name('profile.cv');
+    Route::post('/profile/cv', [CVController::class, 'update'])->name('profile.cv.update');
+    Route::get('/profile/cv/export', [CVController::class, 'export'])->name('profile.cv.export');
 
     // Notifications
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
