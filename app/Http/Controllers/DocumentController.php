@@ -6,6 +6,7 @@ use App\Models\Document;
 use App\Models\DocumentType;
 use App\Models\Department;
 use App\Models\Notification;
+use App\Services\PdfCoverService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -234,10 +235,15 @@ class DocumentController extends Controller
             abort(404, 'Fichier non trouvé');
         }
 
-        return response()->file($filePath, [
+        // Générer le PDF avec page de garde
+        $coverService = new PdfCoverService();
+        $pdfWithCover = $coverService->addCoverPage($document, $filePath);
+
+        // Retourner le PDF avec page de garde et le supprimer après envoi
+        return response()->file($pdfWithCover, [
             'Content-Type' => 'application/pdf',
             'Content-Disposition' => 'inline; filename="' . $document->file_name . '"'
-        ]);
+        ])->deleteFileAfterSend(true);
     }
 
     public function download($aremDocId)
@@ -250,7 +256,20 @@ class DocumentController extends Controller
 
         $document->incrementDownloads();
 
-        return Storage::disk('private')->download($document->file_path, $document->file_name);
+        $filePath = storage_path('app/private/' . $document->file_path);
+
+        if (!file_exists($filePath)) {
+            abort(404, 'Fichier non trouvé');
+        }
+
+        // Générer le PDF avec page de garde
+        $coverService = new PdfCoverService();
+        $pdfWithCover = $coverService->addCoverPage($document, $filePath);
+
+        // Retourner le PDF avec page de garde pour téléchargement
+        return response()->download($pdfWithCover, $document->file_name, [
+            'Content-Type' => 'application/pdf'
+        ])->deleteFileAfterSend(true);
     }
 
     public function browse(Request $request)
