@@ -86,6 +86,29 @@
                 </div>
             </div>
 
+            <!-- PDF Viewer -->
+            @if($document->file_path)
+                <div class="card mb-4">
+                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i class="bi bi-file-earmark-pdf me-2"></i>Visualisation du document
+                        </h5>
+                        <a href="{{ route('documents.download', $document->arem_doc_id) }}"
+                           class="btn btn-sm btn-light"
+                           title="Télécharger le PDF">
+                            <i class="bi bi-download me-1"></i>Télécharger
+                        </a>
+                    </div>
+                    <div class="card-body p-0">
+                        <iframe
+                            src="{{ route('documents.preview', $document->arem_doc_id) }}"
+                            style="width: 100%; height: 780px; border: none; display: block;"
+                            title="Aperçu PDF — {{ $document->title }}"
+                        ></iframe>
+                    </div>
+                </div>
+            @endif
+
             <!-- Metadata -->
             @if($document->metadata->count() > 0)
                 <div class="card mb-4">
@@ -179,7 +202,7 @@
                         </a>
 
                         <!-- View Full -->
-                        <a href="{{ route('documents.show', $document->arem_doc_id) }}" class="btn btn-outline-secondary">
+                        <a href="{{ route('documents.show', $document->arem_doc_id) }}" class="btn btn-outline-secondary" target="_blank">
                             <i class="bi bi-eye me-2"></i>Voir la page publique
                         </a>
                     </div>
