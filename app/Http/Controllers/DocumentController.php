@@ -16,6 +16,7 @@ class DocumentController extends Controller
     public function index(Request $request)
     {
         $query = Document::where('status', 'published')
+            ->where('is_hidden', false)
             ->with(['user', 'department', 'documentType']);
 
         if ($request->has('type') && $request->type) {
@@ -109,6 +110,10 @@ class DocumentController extends Controller
 
         if ($document->status !== 'published' && (!Auth::check() || (Auth::user()->id !== $document->user_id && !Auth::user()->canValidateDocuments()))) {
             abort(403, 'Accès non autorisé');
+        }
+
+        if ($document->is_hidden && (!Auth::check() || !Auth::user()->isAdmin())) {
+            abort(404, 'Document non trouvé');
         }
 
         $document->incrementViews();
@@ -279,17 +284,18 @@ class DocumentController extends Controller
         if ($groupBy === 'type') {
             $items = DocumentType::where('is_active', true)
                 ->withCount(['documents' => function ($query) {
-                    $query->where('status', 'published');
+                    $query->where('status', 'published')->where('is_hidden', false);
                 }])
                 ->get();
         } elseif ($groupBy === 'department') {
             $items = Department::where('is_active', true)
                 ->withCount(['documents' => function ($query) {
-                    $query->where('status', 'published');
+                    $query->where('status', 'published')->where('is_hidden', false);
                 }])
                 ->get();
         } elseif ($groupBy === 'year') {
             $items = Document::where('status', 'published')
+                ->where('is_hidden', false)
                 ->selectRaw('year, COUNT(*) as documents_count')
                 ->groupBy('year')
                 ->orderBy('year', 'desc')

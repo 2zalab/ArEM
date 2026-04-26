@@ -90,6 +90,10 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::patch('/document-types/{id}', [AdminController::class, 'updateDocumentType'])->name('documentTypes.update');
     Route::delete('/document-types/{id}', [AdminController::class, 'deleteDocumentType'])->name('documentTypes.delete');
 
+    // Document management
+    Route::get('/documents', [AdminController::class, 'documents'])->name('documents');
+    Route::post('/documents/{id}/toggle-visibility', [AdminController::class, 'toggleVisibility'])->name('documents.toggleVisibility');
+
     // Statistics
     Route::get('/statistics', [AdminController::class, 'statistics'])->name('statistics');
 });

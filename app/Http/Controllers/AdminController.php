@@ -176,6 +176,44 @@ class AdminController extends Controller
         return redirect()->route('admin.documentTypes')->with('success', 'Type de document supprimé avec succès');
     }
 
+    // Document Management
+    public function documents(Request $request)
+    {
+        $query = Document::with(['user', 'department', 'documentType']);
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        if ($request->filled('visibility')) {
+            $query->where('is_hidden', $request->visibility === 'hidden');
+        }
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('arem_doc_id', 'like', "%{$search}%");
+            });
+        }
+
+        $documents = $query->orderBy('created_at', 'desc')->paginate(20)->withQueryString();
+
+        return view('admin.documents', compact('documents'));
+    }
+
+    public function toggleVisibility($id)
+    {
+        $document = Document::findOrFail($id);
+        $document->update(['is_hidden' => !$document->is_hidden]);
+
+        $message = $document->is_hidden
+            ? 'Document masqué avec succès. Les utilisateurs ne peuvent plus le visualiser.'
+            : 'Document démasqué avec succès. Les utilisateurs peuvent à nouveau le visualiser.';
+
+        return redirect()->back()->with('success', $message);
+    }
+
     // Statistics
     public function statistics()
     {

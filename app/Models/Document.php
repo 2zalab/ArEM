@@ -34,6 +34,7 @@ class Document extends Model
         'published_at',
         'permanent_url',
         'doi',
+        'is_hidden',
     ];
 
     protected $casts = [
@@ -42,6 +43,7 @@ class Document extends Model
         'validated_at' => 'datetime',
         'published_at' => 'datetime',
         'embargo_date' => 'date',
+        'is_hidden' => 'boolean',
     ];
 
     /**
@@ -141,6 +143,11 @@ class Document extends Model
         );
         $stat->increment('downloads');
         return $stat;
+    }
+
+    public function isHidden()
+    {
+        return (bool) $this->is_hidden;
     }
 
     public function isPublished()

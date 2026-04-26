@@ -12,7 +12,7 @@ class SearchController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Document::where('status', 'published');
+        $query = Document::where('status', 'published')->where('is_hidden', false);
 
         if ($request->has('q') && $request->q) {
             $searchTerm = $request->q;
