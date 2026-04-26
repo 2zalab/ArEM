@@ -171,7 +171,7 @@
         </div>
 
         <div class="col-lg-4">
-            <a href="{{ route('documents.index') }}" class="text-decoration-none">
+            <a href="{{ route('admin.documents') }}" class="text-decoration-none">
                 <div class="card border-0 shadow-sm h-100 hover-shadow">
                     <div class="card-body p-4">
                         <div class="d-flex align-items-center mb-3">
@@ -179,8 +179,8 @@
                                 <i class="bi bi-files fs-3 text-secondary"></i>
                             </div>
                             <div>
-                                <h5 class="fw-bold mb-0">Tous les documents</h5>
-                                <p class="text-muted mb-0 small">Voir tous les documents</p>
+                                <h5 class="fw-bold mb-0">Gestion des documents</h5>
+                                <p class="text-muted mb-0 small">Masquer / démasquer des documents</p>
                             </div>
                         </div>
                     </div>
