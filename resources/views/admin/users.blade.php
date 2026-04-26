@@ -43,7 +43,7 @@
                             <th>Nom</th>
                             <th>Email</th>
                             <th>Rôle</th>
-                            <th>Département</th>
+                            <th>Domaine</th>
                             <th>Statut</th>
                             <th>Date d'inscription</th>
                             <th class="text-center">Actions</th>

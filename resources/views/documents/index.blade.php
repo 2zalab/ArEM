@@ -282,9 +282,9 @@
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <label class="form-label">Département</label>
+                    <label class="form-label">Domaine</label>
                     <select name="department" class="form-select">
-                        <option value="">Tous les départements</option>
+                        <option value="">Tous les domaines</option>
                         @foreach($departments as $dept)
                             <option value="{{ $dept->id }}" {{ request('department') == $dept->id ? 'selected' : '' }}>
                                 {{ $dept->name }}

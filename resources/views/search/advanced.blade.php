@@ -75,10 +75,10 @@
 
                                 <div class="col-md-6">
                                     <label for="department" class="form-label">
-                                        <i class="bi bi-building me-2"></i>Département
+                                        <i class="bi bi-building me-2"></i>Domaine
                                     </label>
                                     <select name="department" id="department" class="form-select">
-                                        <option value="">Tous les départements</option>
+                                        <option value="">Tous les domaines</option>
                                         @foreach($departments as $dept)
                                             <option value="{{ $dept->id }}" {{ request('department') == $dept->id ? 'selected' : '' }}>
                                                 {{ $dept->name }}

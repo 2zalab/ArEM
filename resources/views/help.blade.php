@@ -98,8 +98,8 @@
                         <p>ArEM offre plusieurs moyens de recherche :</p>
                         <ul>
                             <li><strong>Recherche simple :</strong> Utilisez la barre de recherche en haut de page</li>
-                            <li><strong>Recherche avancée :</strong> Filtrez par auteur, année, type, département</li>
-                            <li><strong>Navigation :</strong> Parcourez par catégories (type, département, année)</li>
+                            <li><strong>Recherche avancée :</strong> Filtrez par auteur, année, type, domaine</li>
+                            <li><strong>Navigation :</strong> Parcourez par catégories (type, domaine, année)</li>
                         </ul>
                     </div>
                 </div>

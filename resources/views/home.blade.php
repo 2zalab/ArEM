@@ -165,7 +165,7 @@
             <div class="stat-card">
                 <i class="bi bi-building"></i>
                 <h3>{{ $statistics['total_departments'] }}</h3>
-                <p class="text-muted mb-0">Départements</p>
+                <p class="text-muted mb-0">Domaines</p>
             </div>
         </div>
         <div class="col-lg-3 col-md-6">
@@ -230,7 +230,7 @@
                             <i class="bi bi-folder text-primary me-2"></i>Par type de document
                         </a>
                         <a href="{{ route('documents.browse', ['by' => 'department']) }}" class="list-group-item list-group-item-action border-0 px-0">
-                            <i class="bi bi-building text-primary me-2"></i>Par département
+                            <i class="bi bi-building text-primary me-2"></i>Par domaine
                         </a>
                         <a href="{{ route('documents.browse', ['by' => 'year']) }}" class="list-group-item list-group-item-action border-0 px-0">
                             <i class="bi bi-calendar text-primary me-2"></i>Par année

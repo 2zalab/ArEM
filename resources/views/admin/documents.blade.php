@@ -94,7 +94,7 @@
                             <th style="width: 80px">ID</th>
                             <th>Document</th>
                             <th>Auteur</th>
-                            <th>Département</th>
+                            <th>Domaine</th>
                             <th class="text-center">Statut</th>
                             <th class="text-center">Visibilité</th>
                             <th>Date</th>
