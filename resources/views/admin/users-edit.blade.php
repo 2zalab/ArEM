@@ -90,7 +90,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="department_id" class="form-label fw-bold">Département</label>
+                            <label for="department_id" class="form-label fw-bold">Domaine</label>
                             <select
                                 class="form-select @error('department_id') is-invalid @enderror"
                                 id="department_id"

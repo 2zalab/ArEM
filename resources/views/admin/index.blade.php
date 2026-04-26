@@ -66,7 +66,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-start">
                         <div>
-                            <p class="text-muted mb-1 small">Départements</p>
+                            <p class="text-muted mb-1 small">Domaines</p>
                             <h3 class="fw-bold mb-0">{{ \App\Models\Department::count() }}</h3>
                         </div>
                         <div class="rounded-circle bg-info bg-opacity-10 p-3">
@@ -107,8 +107,8 @@
                                 <i class="bi bi-building fs-3 text-success"></i>
                             </div>
                             <div>
-                                <h5 class="fw-bold mb-0">Gestion des départements</h5>
-                                <p class="text-muted mb-0 small">Gérer les départements</p>
+                                <h5 class="fw-bold mb-0">Gestion des domaines</h5>
+                                <p class="text-muted mb-0 small">Gérer les domaines</p>
                             </div>
                         </div>
                     </div>

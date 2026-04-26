@@ -75,7 +75,7 @@ class AdminController extends Controller
 
         Department::create($request->only(['name', 'code']));
 
-        return redirect()->route('admin.departments')->with('success', 'Département créé avec succès');
+        return redirect()->route('admin.departments')->with('success', 'Domaine créé avec succès');
     }
 
     public function updateDepartment(Request $request, $id)
@@ -90,7 +90,7 @@ class AdminController extends Controller
 
         $department->update($request->only(['name', 'code', 'is_active']));
 
-        return redirect()->route('admin.departments')->with('success', 'Département mis à jour avec succès');
+        return redirect()->route('admin.departments')->with('success', 'Domaine mis à jour avec succès');
     }
 
     public function deleteDepartment($id)
@@ -98,12 +98,12 @@ class AdminController extends Controller
         $department = Department::findOrFail($id);
 
         if ($department->documents()->count() > 0) {
-            return redirect()->route('admin.departments')->with('error', 'Impossible de supprimer un département avec des documents');
+            return redirect()->route('admin.departments')->with('error', 'Impossible de supprimer un domaine avec des documents');
         }
 
         $department->delete();
 
-        return redirect()->route('admin.departments')->with('success', 'Département supprimé avec succès');
+        return redirect()->route('admin.departments')->with('success', 'Domaine supprimé avec succès');
     }
 
     // Document Type Management

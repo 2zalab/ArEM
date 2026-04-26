@@ -85,7 +85,7 @@
                         <i class="bi bi-building fs-1 text-secondary"></i>
                     </div>
                     <h3 class="fw-bold mb-1">{{ $stats['total_departments'] }}</h3>
-                    <p class="text-muted mb-0">Départements</p>
+                    <p class="text-muted mb-0">Domaines</p>
                 </div>
             </div>
         </div>
@@ -220,14 +220,14 @@
         <div class="col-lg-6">
             <div class="card shadow-sm">
                 <div class="card-header bg-info text-white">
-                    <h5 class="mb-0"><i class="bi bi-building me-2"></i>Documents par département (Top 10)</h5>
+                    <h5 class="mb-0"><i class="bi bi-building me-2"></i>Documents par domaine (Top 10)</h5>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead class="table-light">
                                 <tr>
-                                    <th>Département</th>
+                                    <th>Domaine</th>
                                     <th class="text-end">Documents</th>
                                     <th width="30%">Répartition</th>
                                 </tr>

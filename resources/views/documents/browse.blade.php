@@ -11,7 +11,7 @@
             Par type
         </a>
         <a href="{{ route('documents.browse', ['by' => 'department']) }}" class="btn btn-{{ $groupBy === 'department' ? '' : 'outline-' }}primary">
-            Par département
+            Par domaine
         </a>
         <a href="{{ route('documents.browse', ['by' => 'year']) }}" class="btn btn-{{ $groupBy === 'year' ? '' : 'outline-' }}primary">
             Par année

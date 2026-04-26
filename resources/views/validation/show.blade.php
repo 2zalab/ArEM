@@ -45,7 +45,7 @@
                         </div>
                         @if($document->department)
                             <div class="col-md-6">
-                                <label class="small text-muted d-block">Département</label>
+                                <label class="small text-muted d-block">Domaine</label>
                                 <p class="mb-0">{{ $document->department->name }}</p>
                             </div>
                         @endif

@@ -114,7 +114,7 @@ class PdfCoverService
 
         $info = [
             ['label' => 'Type de document', 'value' => $document->documentType->name ?? 'N/A'],
-            ['label' => 'Département', 'value' => $document->department->name ?? 'N/A'],
+            ['label' => 'Domaine', 'value' => $document->department->name ?? 'N/A'],
             ['label' => 'Année académique', 'value' => $document->academic_year ?? $document->year],
             ['label' => 'Identifiant ArEM', 'value' => $document->arem_doc_id],
         ];

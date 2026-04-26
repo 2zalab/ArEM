@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
-@section('title', 'Gestion des départements - ArEM')
+@section('title', 'Gestion des domaines - ArEM')
 
 @section('content')
 <div class="container-fluid px-5 py-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h1 class="fw-bold mb-0">Gestion des départements</h1>
-            <p class="text-muted mb-0">Gestion des départements de l'institution</p>
+            <h1 class="fw-bold mb-0">Gestion des domaines</h1>
+            <p class="text-muted mb-0">Gestion des domaines de l'institution</p>
         </div>
         <div class="d-flex gap-2">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
-                <i class="bi bi-plus-circle me-2"></i>Nouveau département
+                <i class="bi bi-plus-circle me-2"></i>Nouveau domaine
             </button>
             <a href="{{ route('admin.index') }}" class="btn btn-outline-secondary">
                 <i class="bi bi-arrow-left me-2"></i>Retour
@@ -21,7 +21,7 @@
 
     <div class="card">
         <div class="card-header bg-primary text-white">
-            <h5 class="mb-0"><i class="bi bi-building me-2"></i>Liste des départements ({{ $departments->count() }})</h5>
+            <h5 class="mb-0"><i class="bi bi-building me-2"></i>Liste des domaines ({{ $departments->count() }})</h5>
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
@@ -84,7 +84,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header bg-primary text-white">
-                                            <h5 class="modal-title">Modifier le département</h5>
+                                            <h5 class="modal-title">Modifier le domaine</h5>
                                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                                         </div>
                                         <form action="{{ route('admin.departments.update', $dept->id) }}" method="POST">
@@ -124,7 +124,7 @@
                                                         {{ $dept->is_active ? 'checked' : '' }}
                                                     >
                                                     <label class="form-check-label" for="edit_is_active{{ $dept->id }}">
-                                                        Département actif
+                                                        Domaine actif
                                                     </label>
                                                 </div>
                                             </div>
@@ -148,11 +148,11 @@
                                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <p>Êtes-vous sûr de vouloir supprimer le département <strong>{{ $dept->name }}</strong> ?</p>
+                                            <p>Êtes-vous sûr de vouloir supprimer le domaine <strong>{{ $dept->name }}</strong> ?</p>
                                             @if($dept->documents_count > 0)
                                                 <div class="alert alert-warning">
                                                     <i class="bi bi-exclamation-triangle me-2"></i>
-                                                    Ce département contient {{ $dept->documents_count }} document(s) et ne peut pas être supprimé.
+                                                    Ce domaine contient {{ $dept->documents_count }} document(s) et ne peut pas être supprimé.
                                                 </div>
                                             @else
                                                 <p class="text-muted small">Cette action est irréversible.</p>
@@ -177,7 +177,7 @@
                             <tr>
                                 <td colspan="6" class="text-center text-muted py-5">
                                     <i class="bi bi-inbox fs-1 d-block mb-3"></i>
-                                    Aucun département trouvé
+                                    Aucun domaine trouvé
                                 </td>
                             </tr>
                         @endforelse
@@ -193,7 +193,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title">Nouveau département</h5>
+                <h5 class="modal-title">Nouveau domaine</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <form action="{{ route('admin.departments.store') }}" method="POST">
@@ -228,7 +228,7 @@
                         @error('code')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                        <div class="form-text">Code court pour identifier le département (max 10 caractères)</div>
+                        <div class="form-text">Code court pour identifier le domaine (max 10 caractères)</div>
                     </div>
                 </div>
                 <div class="modal-footer">
