@@ -623,7 +623,13 @@ const metadataFields = {
     'collection_method': { label: 'Méthode de collecte', type: 'text', required: true },
     'data_format': { label: 'Format des données', type: 'text', required: true },
     'sample_size': { label: 'Taille de l\'échantillon', type: 'text', required: false },
-    'collection_period': { label: 'Période de collecte', type: 'text', required: false }
+    'collection_period': { label: 'Période de collecte', type: 'text', required: false },
+
+    // Champs pour type "Autres"
+    'custom_type': { label: 'Nature / Type précis du document (à définir par l\'auteur)', type: 'text', required: true },
+    'document_description': { label: 'Description détaillée du document', type: 'textarea', required: true },
+    'origin': { label: 'Origine / Provenance du document', type: 'text', required: false },
+    'additional_notes': { label: 'Notes complémentaires', type: 'textarea', required: false }
 };
 
 function updateRequiredFields() {

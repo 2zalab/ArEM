@@ -91,6 +91,12 @@ class DocumentTypeSeeder extends Seeder
                 'description' => 'Article de vulgarisation ou de blog scientifique',
                 'required_fields' => []
             ],
+            [
+                'name' => 'Autres',
+                'code' => 'autres',
+                'description' => 'Tout document ne correspondant à aucun des types listés ci-dessus',
+                'required_fields' => ['custom_type', 'document_description', 'origin', 'reference_number', 'additional_notes']
+            ],
         ];
 
         foreach ($documentTypes as $type) {
