@@ -240,11 +240,11 @@
                 </div>
                 <div class="progress-step" data-step="2">
                     <div class="progress-circle">2</div>
-                    <div class="progress-label">Informations</div>
+                    <div class="progress-label">Métadonnées</div>
                 </div>
                 <div class="progress-step" data-step="3">
                     <div class="progress-circle">3</div>
-                    <div class="progress-label">Métadonnées</div>
+                    <div class="progress-label">Informations</div>
                 </div>
                 <div class="progress-step" data-step="4">
                     <div class="progress-circle">4</div>
@@ -294,9 +294,9 @@
                 </div>
 
                 <!-- General Information -->
-                <div class="card step-card mb-4" data-step-content="2" style="display: none;">
+                <div class="card step-card mb-4" data-step-content="3" style="display: none;">
                     <div class="card-header step-header">
-                        <h5><span class="step-number">2</span>Informations générales</h5>
+                        <h5><span class="step-number">3</span>Informations générales</h5>
                     </div>
                     <div class="card-body">
                         <div class="mb-3">
@@ -441,9 +441,9 @@
                 </div>
 
                 <!-- Dynamic Metadata Fields -->
-                <div class="card step-card mb-4" id="metadataCard" data-step-content="3" style="display: none;">
+                <div class="card step-card mb-4" id="metadataCard" data-step-content="2" style="display: none;">
                     <div class="card-header step-header">
-                        <h5><span class="step-number">3</span>Métadonnées spécifiques</h5>
+                        <h5><span class="step-number">2</span>Métadonnées spécifiques</h5>
                     </div>
                     <div class="card-body" id="metadataFields">
                         <!-- Dynamic fields will be inserted here -->
@@ -637,7 +637,6 @@ function updateRequiredFields() {
     if (requiredFields && requiredFields !== 'null') {
         const fields = JSON.parse(requiredFields);
 
-        // Vérifier que le tableau n'est pas vide
         if (fields && fields.length > 0) {
             metadataFieldsDiv.innerHTML = '';
 
@@ -648,13 +647,11 @@ function updateRequiredFields() {
                     metadataFieldsDiv.innerHTML += fieldHtml;
                 }
             });
-
-            metadataCard.style.display = 'block';
         } else {
-            metadataCard.style.display = 'none';
+            metadataFieldsDiv.innerHTML = '';
         }
     } else {
-        metadataCard.style.display = 'none';
+        metadataFieldsDiv.innerHTML = '';
     }
 }
 
@@ -882,20 +879,20 @@ function showStep(stepNumber) {
         prevBtn.style.display = 'block';
     }
 
-    // Handle step 3 (metadata) - skip if no metadata required
-    if (stepNumber === 3) {
+    // Handle step 2 (metadata) - skip if no metadata required
+    if (stepNumber === 2) {
         const metadataCard = document.getElementById('metadataCard');
         const hasMetadata = metadataCard && metadataCard.querySelector('#metadataFields').innerHTML.trim() !== '';
 
         if (!hasMetadata) {
-            // Skip step 3 if no metadata
-            if (currentStep < 3) {
-                currentStep = 4;
-                showStep(4);
+            // Skip step 2 if no metadata
+            if (currentStep < 2) {
+                currentStep = 3;
+                showStep(3);
                 return;
             } else {
-                currentStep = 2;
-                showStep(2);
+                currentStep = 1;
+                showStep(1);
                 return;
             }
         }
@@ -915,13 +912,13 @@ function showStep(stepNumber) {
 function changeStep(direction) {
     let nextStep = currentStep + direction;
 
-    // Skip step 3 if no metadata required
-    if (nextStep === 3) {
+    // Skip step 2 if no metadata required
+    if (nextStep === 2) {
         const metadataCard = document.getElementById('metadataCard');
         const hasMetadata = metadataCard && metadataCard.querySelector('#metadataFields').innerHTML.trim() !== '';
 
         if (!hasMetadata) {
-            nextStep = direction > 0 ? 4 : 2;
+            nextStep = direction > 0 ? 3 : 1;
         }
     }
 
@@ -966,8 +963,8 @@ function validateStep(stepNumber) {
         }
     });
 
-    // Special validation for step 2 (authors)
-    if (stepNumber === 2) {
+    // Special validation for step 3 (authors)
+    if (stepNumber === 3) {
         const authorsContainer = document.getElementById('authors-container');
         if (authorsContainer && authorsContainer.children.length === 0) {
             isValid = false;
