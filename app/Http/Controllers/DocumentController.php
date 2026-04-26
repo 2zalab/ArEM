@@ -255,7 +255,7 @@ class DocumentController extends Controller
     {
         $document = Document::where('arem_doc_id', $aremDocId)->firstOrFail();
 
-        if (!$document->isAccessible() && (!Auth::check() || Auth::user()->id !== $document->user_id)) {
+        if (!$document->isAccessible() && (!Auth::check() || (Auth::user()->id !== $document->user_id && !Auth::user()->canValidateDocuments()))) {
             abort(403, 'Accès restreint à ce document');
         }
 

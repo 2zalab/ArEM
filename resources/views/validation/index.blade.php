@@ -11,6 +11,13 @@
         </div>
     </div>
 
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle me-2"></i>{{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
     @if($pendingDocuments->count() > 0)
         @foreach($pendingDocuments as $document)
             <div class="card mb-4 border-0 shadow-sm">
@@ -55,6 +62,14 @@
                                 </div>
                             @endif
 
+                            @if($document->file_path)
+                                <div class="border rounded p-2 bg-light d-flex align-items-center gap-2 mt-3">
+                                    <i class="bi bi-file-pdf text-danger fs-5"></i>
+                                    <span class="small text-muted">{{ $document->file_name }}</span>
+                                    <span class="small text-muted">({{ round($document->file_size / 1024 / 1024, 2) }} Mo)</span>
+                                </div>
+                            @endif
+
                             <div class="border-top pt-3 mt-3">
                                 <small class="text-muted">
                                     <i class="bi bi-clock me-2"></i>Déposé le {{ $document->created_at->format('d/m/Y à H:i') }}
@@ -70,9 +85,18 @@
                                 </a>
 
                                 @if($document->file_path)
-                                    <button class="btn btn-outline-secondary" onclick="alert('Fonction de téléchargement à implémenter')">
-                                        <i class="bi bi-download me-2"></i>Télécharger le PDF
+                                    <button class="btn btn-outline-info"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#pdfModal{{ $document->id }}"
+                                            title="Visualiser le PDF">
+                                        <i class="bi bi-file-earmark-pdf me-2"></i>Visualiser le PDF
                                     </button>
+
+                                    <a href="{{ route('documents.download', $document->arem_doc_id) }}"
+                                       class="btn btn-outline-secondary"
+                                       title="Télécharger le PDF">
+                                        <i class="bi bi-download me-2"></i>Télécharger le PDF
+                                    </a>
                                 @endif
 
                                 <hr class="my-2">
@@ -96,6 +120,36 @@
                     </div>
                 </div>
             </div>
+
+            <!-- PDF Preview Modal -->
+            @if($document->file_path)
+                <div class="modal fade" id="pdfModal{{ $document->id }}" tabindex="-1">
+                    <div class="modal-dialog modal-xl modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary text-white py-2">
+                                <h6 class="modal-title mb-0">
+                                    <i class="bi bi-file-pdf me-2"></i>{{ Str::limit($document->title, 60) }}
+                                </h6>
+                                <div class="d-flex align-items-center gap-2">
+                                    <a href="{{ route('documents.download', $document->arem_doc_id) }}"
+                                       class="btn btn-sm btn-light"
+                                       title="Télécharger">
+                                        <i class="bi bi-download me-1"></i>Télécharger
+                                    </a>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                                </div>
+                            </div>
+                            <div class="modal-body p-0" style="height: 80vh;">
+                                <iframe
+                                    src="{{ route('documents.preview', $document->arem_doc_id) }}"
+                                    style="width: 100%; height: 100%; border: none;"
+                                    title="Aperçu PDF"
+                                ></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
 
             <!-- Revision Modal -->
             <div class="modal fade" id="revisionModal{{ $document->id }}" tabindex="-1">
